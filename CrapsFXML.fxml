@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.layout.*?>
+<?import java.lang.*?>
+<?import javafx.scene.shape.*?>
+
+<AnchorPane maxHeight="600.0" maxWidth="800.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="@sprites.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jfxcraps.FXMLCrapsController">
+   <children>
+      <SplitPane dividerPositions="0.19172932330827067" layoutX="190.0" layoutY="62.0" prefHeight="338.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="62.0">
+        <items>
+          <AnchorPane maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="160.0" prefWidth="160.0">
+               <children>
+                  <VBox layoutX="5.0" layoutY="9.0" spacing="10.0" AnchorPane.bottomAnchor="24.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="9.0">
+                     <children>
+                        <HBox alignment="CENTER" layoutX="7.0" layoutY="9.0" prefHeight="25.0" prefWidth="147.0" spacing="10.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="9.0">
+                           <children>
+                              <Label layoutX="14.0" layoutY="18.0" minWidth="-Infinity" prefWidth="70.0" text="Pass Line" AnchorPane.leftAnchor="7.0" HBox.hgrow="ALWAYS" />
+                              <Button fx:id="PassBetButton" alignment="CENTER" contentDisplay="CENTER" layoutX="109.0" layoutY="9.0" mnemonicParsing="false" onAction="#PassButtonAction" prefHeight="25.0" prefWidth="50.0" text="Bet" AnchorPane.rightAnchor="7.0" HBox.hgrow="ALWAYS" />
+                              <Label fx:id="PassBetLabel" prefWidth="40.0" text="\$0" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" layoutX="7.0" layoutY="47.0" prefHeight="25.0" prefWidth="147.0" spacing="10.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="6.0">
+                           <children>
+                              <Label contentDisplay="CENTER" layoutX="12.0" layoutY="51.0" minWidth="-Infinity" prefWidth="70.0" text="Odds" textAlignment="CENTER" AnchorPane.leftAnchor="12.0" HBox.hgrow="ALWAYS" />
+                              <Button fx:id="OddsBetButton" alignment="CENTER" contentDisplay="CENTER" layoutX="91.0" layoutY="47.0" mnemonicParsing="false" onAction="#OddsButtonAction" prefHeight="25.0" prefWidth="50.0" text="Bet" textAlignment="CENTER" AnchorPane.rightAnchor="7.0" HBox.hgrow="ALWAYS" />
+                              <Label fx:id="OddsBetLabel" prefWidth="40.0" text="\$0" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" layoutX="10.0" layoutY="79.0" prefHeight="25.0" prefWidth="147.0" spacing="10.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="6.0">
+                           <children>
+                              <Label layoutX="10.0" layoutY="83.0" minWidth="-Infinity" prefWidth="70.0" text="Field" AnchorPane.leftAnchor="10.0" />
+                              <Button fx:id="FieldBetButton" alignment="CENTER" contentDisplay="CENTER" layoutX="109.0" layoutY="79.0" mnemonicParsing="false" onAction="#FieldButtonAction" prefHeight="25.0" prefWidth="50.0" text="Bet" AnchorPane.rightAnchor="7.0">
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                              </Button>
+                              <Label fx:id="FieldBetLabel" prefWidth="40.0" text="\$0" />
+                           </children>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                        </HBox>
+                        <HBox alignment="CENTER" layoutX="7.0" layoutY="114.0" prefHeight="25.0" prefWidth="147.0" spacing="10.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="6.0">
+                           <children>
+                              <Label layoutX="7.0" layoutY="118.0" minWidth="-Infinity" prefWidth="70.0" text="Come" AnchorPane.leftAnchor="7.0" />
+                              <Button fx:id="ComeBetButton" layoutX="109.0" layoutY="114.0" mnemonicParsing="false" onAction="#ComeButtonAction" prefWidth="50.0" text="Bet" AnchorPane.rightAnchor="7.0" />
+                              <Label fx:id="ComeBetLabel" prefWidth="40.0" text="\$0" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" layoutX="5.0" layoutY="149.0" prefHeight="25.0" prefWidth="147.0" spacing="10.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="6.0">
+                           <children>
+                              <Label layoutX="12.0" layoutY="153.0" minWidth="-Infinity" prefWidth="70.0" text="4" AnchorPane.leftAnchor="12.0" />
+                              <Button fx:id="FourBetButton" layoutX="109.0" layoutY="149.0" mnemonicParsing="false" onAction="#FourBetButtonAction" prefWidth="50.0" text="Bet" AnchorPane.rightAnchor="7.0" />
+                              <Label fx:id="FourBetLabel" prefWidth="40.0" text="\$0" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" layoutX="5.0" layoutY="184.0" prefHeight="25.0" prefWidth="147.0" spacing="10.0" AnchorPane.bottomAnchor="327.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="6.0">
+                           <children>
+                              <Label layoutX="19.0" layoutY="188.0" minWidth="-Infinity" prefWidth="70.0" text="5" AnchorPane.leftAnchor="19.0" />
+                              <Button fx:id="FiveBetButton" layoutX="109.0" layoutY="184.0" mnemonicParsing="false" onAction="#FiveBetButtonAction" prefWidth="50.0" text="Bet" AnchorPane.rightAnchor="7.0" HBox.hgrow="ALWAYS" />
+                              <Label fx:id="FiveBetLabel" prefWidth="40.0" text="\$0" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" layoutX="9.0" layoutY="219.0" spacing="10.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="6.0">
+                           <children>
+                              <Label layoutX="9.0" layoutY="223.0" minWidth="-Infinity" prefHeight="25.0" prefWidth="70.0" text="6" AnchorPane.leftAnchor="9.0" />
+                              <Button fx:id="SixBetButton" layoutX="109.0" layoutY="219.0" mnemonicParsing="false" onAction="#SixBetButtonAction" prefWidth="50.0" text="Bet" AnchorPane.rightAnchor="7.0" />
+                              <Label fx:id="SixBetLabel" prefWidth="40.0" text="\$0" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" layoutX="5.0" layoutY="254.0" prefHeight="25.0" prefWidth="147.0" spacing="10.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="8.0">
+                           <children>
+                              <Label layoutX="15.0" layoutY="260.0" minWidth="-Infinity" prefWidth="70.0" text="8" AnchorPane.leftAnchor="15.0" />
+                              <Button fx:id="EightBetButton" layoutX="109.0" layoutY="254.0" mnemonicParsing="false" onAction="#EightBetButtonAction" prefWidth="50.0" text="Bet" AnchorPane.rightAnchor="7.0" />
+                              <Label fx:id="EightBetLabel" prefWidth="40.0" text="\$0" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" layoutX="5.0" layoutY="289.0" spacing="10.0">
+                           <children>
+                              <Label layoutX="5.0" layoutY="293.0" minWidth="-Infinity" prefWidth="70.0" text="9" AnchorPane.leftAnchor="5.0" />
+                              <Button fx:id="NineBetButton" layoutX="100.0" layoutY="289.0" mnemonicParsing="false" onAction="#NineBetButtonAction" prefWidth="50.0" text="Bet" AnchorPane.rightAnchor="8.0" />
+                              <Label fx:id="NineBetLabel" prefWidth="40.0" text="\$0" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" layoutX="5.0" layoutY="324.0" prefHeight="25.0" prefWidth="147.0" spacing="10.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="8.0">
+                           <children>
+                              <Label layoutX="2.0" layoutY="328.0" minWidth="-Infinity" prefWidth="70.0" text="10" AnchorPane.leftAnchor="2.0" />
+                              <Button fx:id="TenBetButton" layoutX="109.0" layoutY="324.0" mnemonicParsing="false" onAction="#TenBetButtonAction" prefWidth="50.0" text="Bet" AnchorPane.rightAnchor="7.0" />
+                              <Label fx:id="TenBetLabel" prefWidth="40.0" text="\$0" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <VBox layoutX="6.0" layoutY="382.0" spacing="10.0" AnchorPane.bottomAnchor="24.0" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="382.0">
+                     <children>
+                        <HBox alignment="CENTER" layoutX="2.0" layoutY="382.0" prefHeight="25.0" prefWidth="150.0" spacing="10.0" AnchorPane.bottomAnchor="129.0" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="7.0">
+                           <children>
+                              <Label layoutX="2.0" layoutY="386.0" minWidth="-Infinity" prefWidth="70.0" text="Don't Pass" />
+                              <Button fx:id="DPBetButton" layoutX="109.0" layoutY="382.0" mnemonicParsing="false" onAction="#DPBetButtonAction" prefHeight="25.0" prefWidth="50.0" text="Bet" />
+                              <Label fx:id="DPBetLabel" prefWidth="40.0" text="\$0" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" layoutX="5.0" layoutY="420.0" spacing="10.0" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="7.0">
+                           <children>
+                              <Label layoutX="5.0" layoutY="424.0" minWidth="-Infinity" prefWidth="70.0" text="Lay Odds" />
+                              <Button fx:id="DPLayBetButton" layoutX="109.0" layoutY="420.0" mnemonicParsing="false" onAction="#DPLayButtonAction" prefWidth="50.0" text="Bet" />
+                              <Label fx:id="DPLayBetLabel" prefWidth="40.0" text="\$0" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" layoutX="8.0" layoutY="455.0" spacing="10.0" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="7.0">
+                           <children>
+                              <Label layoutX="8.0" layoutY="459.0" minWidth="-Infinity" prefWidth="70.0" text="Don't Come" />
+                              <Button fx:id="DCBetButton" layoutX="109.0" layoutY="455.0" mnemonicParsing="false" onAction="#DCBetButtonAction" prefWidth="50.0" text="Bet" />
+                              <Label fx:id="DCBetLabel" prefWidth="40.0" text="\$0" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" layoutX="6.0" layoutY="492.0" spacing="10.0" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="7.0">
+                           <children>
+                              <Label layoutX="6.0" layoutY="496.0" minWidth="-Infinity" prefWidth="70.0" text="DC Lay Odds" />
+                              <Button fx:id="DCLayBetButton" layoutX="109.0" layoutY="492.0" mnemonicParsing="false" onAction="#DCLayButtonAction" prefWidth="50.0" text="Bet" />
+                              <Label fx:id="DCLayBetLabel" prefWidth="40.0" text="\$0" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <Separator layoutX="-23.0" layoutY="368.0" prefWidth="200.0" AnchorPane.leftAnchor="-23.0" AnchorPane.rightAnchor="-17.0" />
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <StackPane layoutX="192.0" layoutY="179.0" prefHeight="536.0" prefWidth="642.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <Pane>
+                           <children>
+                              <ImageView fitHeight="536.0" fitWidth="642.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@Craps.png" />
+                                 </image>
+                              </ImageView>
+                              <MenuButton fx:id="PassMB" layoutX="288.0" layoutY="415.0" mnemonicParsing="false" opacity="0.0" styleClass="pixels" text="Pass">
+                                <items>
+                                  <MenuItem mnemonicParsing="false" onAction="#PassMBMinus" text="Minus" />
+                                  <MenuItem mnemonicParsing="false" onAction="#PassMBClear" text="Clear" />
+                                </items>
+                              </MenuButton>
+                              <MenuButton fx:id="OddsMB" layoutX="288.0" layoutY="460.0" mnemonicParsing="false" opacity="0.0" styleClass="ChipMB" stylesheets="@sprites.css" text="Odds">
+                                 <items>
+                                    <MenuItem mnemonicParsing="false" onAction="#OddsMBMinus" text="Minus" />
+                                    <MenuItem mnemonicParsing="false" onAction="#OddsMBClear" text="Clear" />
+                                 </items>
+                              </MenuButton>
+                              <MenuButton fx:id="FieldMB" layoutX="288.0" layoutY="305.0" mnemonicParsing="false" opacity="0.0" text="Field">
+                                 <items>
+                                    <MenuItem mnemonicParsing="false" onAction="#FieldMBMinus" text="Minus" />
+                                    <MenuItem mnemonicParsing="false" onAction="#FieldMBClear" text="Clear" />
+                                 </items>
+                              </MenuButton>
+                              <MenuButton fx:id="ComeMB" layoutX="288.0" layoutY="230.0" mnemonicParsing="false" opacity="0.0" text="Come">
+                                 <items>
+                                    <MenuItem mnemonicParsing="false" onAction="#ComeMBMinus" text="Minus" />
+                                    <MenuItem mnemonicParsing="false" onAction="#ComeMBClear" text="Clear" />
+                                 </items>
+                              </MenuButton>
+                              <MenuButton fx:id="FourMB" layoutX="185.0" layoutY="180.0" mnemonicParsing="false" opacity="0.0" text="Four">
+                                 <items>
+                                    <MenuItem mnemonicParsing="false" onAction="#FourMBMinus" text="Minus" />
+                                    <MenuItem mnemonicParsing="false" onAction="#FourMBClear" text="Clear" />
+                                 </items>
+                              </MenuButton>
+                              <MenuButton fx:id="FiveMB" layoutX="265.0" layoutY="180.0" mnemonicParsing="false" opacity="0.0" text="Five">
+                                 <items>
+                                    <MenuItem mnemonicParsing="false" onAction="#FiveMBMinus" text="Minus" />
+                                    <MenuItem mnemonicParsing="false" onAction="#FiveMBClear" text="Clear" />
+                                 </items>
+                              </MenuButton>
+                              <MenuButton fx:id="SixMB" layoutX="343.0" layoutY="180.0" mnemonicParsing="false" opacity="0.0" text="Six">
+                                 <items>
+                                    <MenuItem mnemonicParsing="false" onAction="#SixMBMinus" text="Minus" />
+                                    <MenuItem mnemonicParsing="false" onAction="#SixMBClear" text="Clear" />
+                                 </items>
+                              </MenuButton>
+                              <MenuButton fx:id="EightMB" layoutX="417.0" layoutY="180.0" mnemonicParsing="false" opacity="0.0" text="Eight">
+                                 <items>
+                                    <MenuItem mnemonicParsing="false" onAction="#EightMBMinus" text="Minus" />
+                                    <MenuItem mnemonicParsing="false" onAction="#EightMBClear" text="Clear" />
+                                 </items>
+                              </MenuButton>
+                              <MenuButton fx:id="NineMB" layoutX="495.0" layoutY="180.0" mnemonicParsing="false" opacity="0.0" text="Nine">
+                                 <items>
+                                    <MenuItem mnemonicParsing="false" text="Minus" />
+                                    <MenuItem mnemonicParsing="false" text="Clear" />
+                                 </items>
+                              </MenuButton>
+                              <MenuButton fx:id="TenMB" layoutX="569.0" layoutY="180.0" mnemonicParsing="false" opacity="0.0" text="Ten">
+                                 <items>
+                                    <MenuItem mnemonicParsing="false" text="Minus" />
+                                    <MenuItem mnemonicParsing="false" text="Clear" />
+                                 </items>
+                              </MenuButton>
+                              <MenuButton fx:id="DPMB" layoutX="50.0" layoutY="180.0" mnemonicParsing="false" opacity="0.0" styleClass="pixels" text="DP">
+                                 <items>
+                                    <MenuItem mnemonicParsing="false" onAction="#DPMBMinus" text="Minus" />
+                                    <MenuItem mnemonicParsing="false" onAction="#DPMBClear" text="Clear" />
+                                 </items>
+                              </MenuButton>
+                              <MenuButton fx:id="DPMB1" layoutX="50.0" layoutY="218.0" mnemonicParsing="false" opacity="0.0" styleClass="pixels" text="DPLay">
+                                 <items>
+                                    <MenuItem mnemonicParsing="false" onAction="#DPLayMBMinus" text="Minus" />
+                                    <MenuItem mnemonicParsing="false" onAction="#DPLayMBClear" text="Clear" />
+                                 </items>
+                              </MenuButton>
+                              <MenuButton fx:id="DCMB" layoutX="115.0" layoutY="100.0" mnemonicParsing="false" opacity="0.0" styleClass="pixels" text="DC">
+                                 <items>
+                                    <MenuItem mnemonicParsing="false" text="Minus" />
+                                    <MenuItem mnemonicParsing="false" text="Clear" />
+                                 </items>
+                              </MenuButton>
+                              <ImageView fx:id="PuckPic" layoutX="115.0" layoutY="134.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@off.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </Pane>
+                     </children>
+                  </StackPane>
+               </children></AnchorPane>
+        </items>
+      </SplitPane>
+      <HBox alignment="CENTER" layoutY="1.0" prefHeight="67.0" prefWidth="800.0" spacing="10.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="1.0">
+         <children>
+            <HBox alignment="CENTER" layoutX="14.0" layoutY="14.0" prefHeight="50.0" prefWidth="50.0" spacing="10.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <Label layoutX="14.0" layoutY="14.0" text="Bank Account:" />
+                  <Label fx:id="BankLabel" layoutX="90.0" layoutY="14.0" text="\$100" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" layoutX="157.0" layoutY="14.0" prefWidth="50.0" spacing="10.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <Label layoutX="157.0" layoutY="14.0" text="Total Bets:" />
+                  <Label fx:id="TotalBetLabel" layoutX="212.0" layoutY="14.0" text="\$0" />
+               </children>
+            </HBox>
+            <VBox alignment="CENTER" layoutX="285.0" layoutY="14.0" prefHeight="47.0" prefWidth="50.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <HBox alignment="CENTER" layoutX="285.0" layoutY="14.0" prefHeight="17.0" prefWidth="150.0" spacing="10.0">
+                     <children>
+                        <Label layoutX="285.0" layoutY="14.0" text="Die One Roll:" />
+                        <Label fx:id="Die1Label" layoutX="354.0" layoutY="14.0" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" layoutX="285.0" layoutY="31.0" prefHeight="17.0" prefWidth="150.0" spacing="10.0">
+                     <children>
+                        <Label layoutX="285.0" layoutY="31.0" text="Die Two Roll:" />
+                        <Label fx:id="Die2Label" layoutX="354.0" layoutY="31.0" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <HBox>
+               <children>
+                  <ImageView fx:id="DiePic1" opacity="0.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@1.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="DiePic2" opacity="0.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@2.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="47.0" prefWidth="30.0" spacing="10.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <Label layoutX="497.0" layoutY="14.0" text="Point:" />
+                  <Label fx:id="PointLabel" layoutX="535.0" layoutY="14.0" />
+               </children>
+            </HBox>
+            <Button fx:id="RollButton" mnemonicParsing="false" onAction="#RollButtonAction" prefWidth="50.0" text="ROLL!" />
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </HBox>
+   </children>
+</AnchorPane>
