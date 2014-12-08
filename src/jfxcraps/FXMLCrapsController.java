@@ -404,6 +404,7 @@ public class FXMLCrapsController {
         NineBetLabel.setText("$" + Integer.toString(NineBet));
         NineMB.setText(Integer.toString(NineBet));
         if(NineBet == 0) NineMB.setOpacity(0);
+        System.out.println("Nine Bet: " + NineBet);
     }
     
     @FXML void NineMBClear(ActionEvent event) { 
@@ -499,8 +500,8 @@ public class FXMLCrapsController {
                 TOTAL += 3;
             }
         }else{
-            if(POINT == 4 || POINT == 10 && DPLayBet >= DPBet*4) return;
-            if(POINT == 6 || POINT == 8 && DPLayBet >= DPBet*2.4) return;
+            if(POINT == 4 || POINT == 10) if(DPLayBet>=DPBet*4) return;
+            if(POINT == 6 || POINT == 8) if(DPLayBet>=DPBet*2.4) return;
             DPLayBet += DontPay;
             BANK -= DontPay;
             TOTAL += DontPay;

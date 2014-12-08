@@ -192,14 +192,14 @@
                               </MenuButton>
                               <MenuButton fx:id="NineMB" layoutX="495.0" layoutY="100.0" mnemonicParsing="false" opacity="0.0" text="Nine">
                                  <items>
-                                    <MenuItem mnemonicParsing="false" text="Minus" />
-                                    <MenuItem mnemonicParsing="false" text="Clear" />
+                                    <MenuItem mnemonicParsing="false" onAction="#NineMBMinus" text="Minus" />
+                                    <MenuItem mnemonicParsing="false" onAction="#NineMBClear" text="Clear" />
                                  </items>
                               </MenuButton>
                               <MenuButton fx:id="TenMB" layoutX="572.0" layoutY="100.0" mnemonicParsing="false" opacity="0.0" text="Ten">
                                  <items>
-                                    <MenuItem mnemonicParsing="false" text="Minus" />
-                                    <MenuItem mnemonicParsing="false" text="Clear" />
+                                    <MenuItem mnemonicParsing="false" onAction="#TenMBMinus" text="Minus" />
+                                    <MenuItem mnemonicParsing="false" onAction="#TenMBClear" text="Clear" />
                                  </items>
                               </MenuButton>
                               <MenuButton fx:id="DPMB" layoutX="50.0" layoutY="180.0" mnemonicParsing="false" opacity="0.0" text="DP">
@@ -216,8 +216,8 @@
                               </MenuButton>
                               <MenuButton fx:id="DCMB" layoutX="115.0" layoutY="100.0" mnemonicParsing="false" opacity="0.0" text="DC">
                                  <items>
-                                    <MenuItem mnemonicParsing="false" text="Minus" />
-                                    <MenuItem mnemonicParsing="false" text="Clear" />
+                                    <MenuItem mnemonicParsing="false" onAction="#DCMBMinus" text="Minus" />
+                                    <MenuItem mnemonicParsing="false" onAction="#DCMBClear" text="Clear" />
                                  </items>
                               </MenuButton>
                               <ImageView fx:id="PuckPic" layoutX="115.0" layoutY="134.0" pickOnBounds="true" preserveRatio="true">
