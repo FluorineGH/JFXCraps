@@ -9,13 +9,13 @@
 <?import java.lang.*?>
 <?import javafx.scene.shape.*?>
 
-<AnchorPane maxHeight="600.0" maxWidth="800.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="@sprites.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jfxcraps.FXMLCrapsController">
+<AnchorPane maxHeight="600.0" maxWidth="800.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jfxcraps.FXMLCrapsController">
    <children>
       <SplitPane dividerPositions="0.19172932330827067" layoutX="190.0" layoutY="62.0" prefHeight="338.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="62.0">
         <items>
           <AnchorPane maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="160.0" prefWidth="160.0">
                <children>
-                  <VBox layoutX="5.0" layoutY="9.0" spacing="10.0" AnchorPane.bottomAnchor="24.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="9.0">
+                  <VBox layoutX="5.0" layoutY="9.0" prefHeight="348.0" prefWidth="150.0" spacing="10.0" AnchorPane.bottomAnchor="179.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="9.0">
                      <children>
                         <HBox alignment="CENTER" layoutX="7.0" layoutY="9.0" prefHeight="25.0" prefWidth="147.0" spacing="10.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="9.0">
                            <children>
@@ -96,7 +96,7 @@
                         </HBox>
                      </children>
                   </VBox>
-                  <VBox layoutX="6.0" layoutY="382.0" spacing="10.0" AnchorPane.bottomAnchor="24.0" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="382.0">
+                  <VBox layoutX="6.0" layoutY="385.0" prefHeight="145.0" prefWidth="150.0" spacing="10.0" AnchorPane.bottomAnchor="6.0" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="385.0">
                      <children>
                         <HBox alignment="CENTER" layoutX="2.0" layoutY="382.0" prefHeight="25.0" prefWidth="150.0" spacing="10.0" AnchorPane.bottomAnchor="129.0" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="7.0">
                            <children>
@@ -142,13 +142,13 @@
                                     <Image url="@Craps.png" />
                                  </image>
                               </ImageView>
-                              <MenuButton fx:id="PassMB" layoutX="288.0" layoutY="415.0" mnemonicParsing="false" opacity="0.0" styleClass="pixels" text="Pass">
+                              <MenuButton fx:id="PassMB" layoutX="288.0" layoutY="415.0" mnemonicParsing="false" opacity="0.0" text="Pass">
                                 <items>
                                   <MenuItem mnemonicParsing="false" onAction="#PassMBMinus" text="Minus" />
                                   <MenuItem mnemonicParsing="false" onAction="#PassMBClear" text="Clear" />
                                 </items>
                               </MenuButton>
-                              <MenuButton fx:id="OddsMB" layoutX="288.0" layoutY="460.0" mnemonicParsing="false" opacity="0.0" styleClass="ChipMB" stylesheets="@sprites.css" text="Odds">
+                              <MenuButton fx:id="OddsMB" layoutX="288.0" layoutY="460.0" mnemonicParsing="false" opacity="0.0" text="Odds">
                                  <items>
                                     <MenuItem mnemonicParsing="false" onAction="#OddsMBMinus" text="Minus" />
                                     <MenuItem mnemonicParsing="false" onAction="#OddsMBClear" text="Clear" />
@@ -160,61 +160,61 @@
                                     <MenuItem mnemonicParsing="false" onAction="#FieldMBClear" text="Clear" />
                                  </items>
                               </MenuButton>
-                              <MenuButton fx:id="ComeMB" layoutX="288.0" layoutY="230.0" mnemonicParsing="false" opacity="0.0" text="Come">
+                              <MenuButton fx:id="ComeMB" layoutX="302.0" layoutY="243.0" mnemonicParsing="false" opacity="0.0" text="Come">
                                  <items>
                                     <MenuItem mnemonicParsing="false" onAction="#ComeMBMinus" text="Minus" />
                                     <MenuItem mnemonicParsing="false" onAction="#ComeMBClear" text="Clear" />
                                  </items>
                               </MenuButton>
-                              <MenuButton fx:id="FourMB" layoutX="185.0" layoutY="180.0" mnemonicParsing="false" opacity="0.0" text="Four">
+                              <MenuButton fx:id="FourMB" layoutX="185.0" layoutY="100.0" mnemonicParsing="false" opacity="0.0" text="Four">
                                  <items>
                                     <MenuItem mnemonicParsing="false" onAction="#FourMBMinus" text="Minus" />
                                     <MenuItem mnemonicParsing="false" onAction="#FourMBClear" text="Clear" />
                                  </items>
                               </MenuButton>
-                              <MenuButton fx:id="FiveMB" layoutX="265.0" layoutY="180.0" mnemonicParsing="false" opacity="0.0" text="Five">
+                              <MenuButton fx:id="FiveMB" layoutX="262.0" layoutY="100.0" mnemonicParsing="false" opacity="0.0" text="Five">
                                  <items>
                                     <MenuItem mnemonicParsing="false" onAction="#FiveMBMinus" text="Minus" />
                                     <MenuItem mnemonicParsing="false" onAction="#FiveMBClear" text="Clear" />
                                  </items>
                               </MenuButton>
-                              <MenuButton fx:id="SixMB" layoutX="343.0" layoutY="180.0" mnemonicParsing="false" opacity="0.0" text="Six">
+                              <MenuButton fx:id="SixMB" layoutX="343.0" layoutY="100.0" mnemonicParsing="false" opacity="0.0" text="Six">
                                  <items>
                                     <MenuItem mnemonicParsing="false" onAction="#SixMBMinus" text="Minus" />
                                     <MenuItem mnemonicParsing="false" onAction="#SixMBClear" text="Clear" />
                                  </items>
                               </MenuButton>
-                              <MenuButton fx:id="EightMB" layoutX="417.0" layoutY="180.0" mnemonicParsing="false" opacity="0.0" text="Eight">
+                              <MenuButton fx:id="EightMB" layoutX="416.0" layoutY="100.0" mnemonicParsing="false" opacity="0.0" text="Eight">
                                  <items>
                                     <MenuItem mnemonicParsing="false" onAction="#EightMBMinus" text="Minus" />
                                     <MenuItem mnemonicParsing="false" onAction="#EightMBClear" text="Clear" />
                                  </items>
                               </MenuButton>
-                              <MenuButton fx:id="NineMB" layoutX="495.0" layoutY="180.0" mnemonicParsing="false" opacity="0.0" text="Nine">
+                              <MenuButton fx:id="NineMB" layoutX="495.0" layoutY="100.0" mnemonicParsing="false" opacity="0.0" text="Nine">
                                  <items>
                                     <MenuItem mnemonicParsing="false" text="Minus" />
                                     <MenuItem mnemonicParsing="false" text="Clear" />
                                  </items>
                               </MenuButton>
-                              <MenuButton fx:id="TenMB" layoutX="569.0" layoutY="180.0" mnemonicParsing="false" opacity="0.0" text="Ten">
+                              <MenuButton fx:id="TenMB" layoutX="572.0" layoutY="100.0" mnemonicParsing="false" opacity="0.0" text="Ten">
                                  <items>
                                     <MenuItem mnemonicParsing="false" text="Minus" />
                                     <MenuItem mnemonicParsing="false" text="Clear" />
                                  </items>
                               </MenuButton>
-                              <MenuButton fx:id="DPMB" layoutX="50.0" layoutY="180.0" mnemonicParsing="false" opacity="0.0" styleClass="pixels" text="DP">
+                              <MenuButton fx:id="DPMB" layoutX="50.0" layoutY="180.0" mnemonicParsing="false" opacity="0.0" text="DP">
                                  <items>
                                     <MenuItem mnemonicParsing="false" onAction="#DPMBMinus" text="Minus" />
                                     <MenuItem mnemonicParsing="false" onAction="#DPMBClear" text="Clear" />
                                  </items>
                               </MenuButton>
-                              <MenuButton fx:id="DPLayMB" layoutX="50.0" layoutY="218.0" mnemonicParsing="false" opacity="0.0" styleClass="pixels" text="DPLay">
+                              <MenuButton fx:id="DPLayMB" layoutX="50.0" layoutY="218.0" mnemonicParsing="false" opacity="0.0" text="DPLay">
                                  <items>
                                     <MenuItem mnemonicParsing="false" onAction="#DPLayMBMinus" text="Minus" />
                                     <MenuItem mnemonicParsing="false" onAction="#DPLayMBClear" text="Clear" />
                                  </items>
                               </MenuButton>
-                              <MenuButton fx:id="DCMB" layoutX="115.0" layoutY="100.0" mnemonicParsing="false" opacity="0.0" styleClass="pixels" text="DC">
+                              <MenuButton fx:id="DCMB" layoutX="115.0" layoutY="100.0" mnemonicParsing="false" opacity="0.0" text="DC">
                                  <items>
                                     <MenuItem mnemonicParsing="false" text="Minus" />
                                     <MenuItem mnemonicParsing="false" text="Clear" />
@@ -225,6 +225,78 @@
                                     <Image url="@off.png" />
                                  </image>
                               </ImageView>
+                              <MenuButton fx:id="C4MB" layoutX="185.0" layoutY="168.0" mnemonicParsing="false" opacity="0.0" text="C4">
+                                 <items>
+                                    <MenuItem mnemonicParsing="false" onAction="#C4Add" text="Add" />
+                                    <MenuItem mnemonicParsing="false" onAction="#C4Odds" text="Odds" />
+                                 </items>
+                              </MenuButton>
+                              <MenuButton fx:id="C5MB" layoutX="265.0" layoutY="168.0" mnemonicParsing="false" opacity="0.0" text="C5">
+                                 <items>
+                                    <MenuItem mnemonicParsing="false" onAction="#C5Add" text="Add" />
+                                    <MenuItem mnemonicParsing="false" onAction="#C5Odds" text="Odds" />
+                                 </items>
+                              </MenuButton>
+                              <MenuButton fx:id="C4OddsMB" layoutX="175.0" layoutY="206.0" mnemonicParsing="false" opacity="0.0" text="C4Odds">
+                                 <items>
+                                    <MenuItem mnemonicParsing="false" onAction="#C4OddsMBMinus" text="Minus" />
+                                    <MenuItem mnemonicParsing="false" onAction="#C4OddsMBClear" text="Clear" />
+                                 </items>
+                              </MenuButton>
+                              <MenuButton fx:id="C5OddsMB" layoutX="251.0" layoutY="206.0" mnemonicParsing="false" opacity="0.0" text="C5Odds">
+                                 <items>
+                                    <MenuItem mnemonicParsing="false" onAction="#C5OddsMBMinus" text="Minus" />
+                                    <MenuItem mnemonicParsing="false" onAction="#C5OddsMBClear" text="Clear" />
+                                 </items>
+                              </MenuButton>
+                              <MenuButton fx:id="C6MB" layoutX="343.0" layoutY="168.0" mnemonicParsing="false" opacity="0.0" text="C6">
+                                 <items>
+                                    <MenuItem mnemonicParsing="false" onAction="#C6Add" text="Add" />
+                                    <MenuItem mnemonicParsing="false" onAction="#C6Odds" text="Odds" />
+                                 </items>
+                              </MenuButton>
+                              <MenuButton fx:id="C8MB" layoutX="422.0" layoutY="168.0" mnemonicParsing="false" opacity="0.0" text="C8">
+                                 <items>
+                                    <MenuItem mnemonicParsing="false" onAction="#C8Add" text="Add" />
+                                    <MenuItem mnemonicParsing="false" onAction="#C8Odds" text="Odds" />
+                                 </items>
+                              </MenuButton>
+                              <MenuButton fx:id="C9MB" layoutX="500.0" layoutY="168.0" mnemonicParsing="false" opacity="0.0" text="C9">
+                                 <items>
+                                    <MenuItem mnemonicParsing="false" onAction="#C9Add" text="Add" />
+                                    <MenuItem mnemonicParsing="false" onAction="#C9Odds" text="Odds" />
+                                 </items>
+                              </MenuButton>
+                              <MenuButton fx:id="C10MB" layoutX="575.0" layoutY="168.0" mnemonicParsing="false" opacity="0.0" text="C10">
+                                 <items>
+                                    <MenuItem mnemonicParsing="false" onAction="#C10Add" text="Add" />
+                                    <MenuItem mnemonicParsing="false" onAction="#C10Odds" text="Odds" />
+                                 </items>
+                              </MenuButton>
+                              <MenuButton fx:id="C6OddsMB" layoutX="329.0" layoutY="206.0" mnemonicParsing="false" opacity="0.0" text="C6Odds">
+                                 <items>
+                                    <MenuItem mnemonicParsing="false" onAction="#C6OddsMBMinus" text="Minus" />
+                                    <MenuItem mnemonicParsing="false" onAction="#C6OddsMBClear" text="Clear" />
+                                 </items>
+                              </MenuButton>
+                              <MenuButton fx:id="C8OddsMB" layoutX="408.0" layoutY="206.0" mnemonicParsing="false" opacity="0.0" text="C8Odds">
+                                 <items>
+                                    <MenuItem mnemonicParsing="false" onAction="#C8OddsMBMinus" text="Minus" />
+                                    <MenuItem mnemonicParsing="false" onAction="#C8OddsMBClear" text="Clear" />
+                                 </items>
+                              </MenuButton>
+                              <MenuButton fx:id="C9OddsMB" layoutX="486.0" layoutY="206.0" mnemonicParsing="false" opacity="0.0" text="C9Odds">
+                                 <items>
+                                    <MenuItem mnemonicParsing="false" onAction="#C9OddsMBMinus" text="Minus" />
+                                    <MenuItem mnemonicParsing="false" onAction="#C9OddsMBClear" text="Clear" />
+                                 </items>
+                              </MenuButton>
+                              <MenuButton fx:id="C10OddsMB" layoutX="560.0" layoutY="206.0" mnemonicParsing="false" opacity="0.0" text="C10Odds">
+                                 <items>
+                                    <MenuItem mnemonicParsing="false" onAction="#C10OddsMBMinus" text="Minus" />
+                                    <MenuItem mnemonicParsing="false" onAction="#C10OddsMBClear" text="Clear" />
+                                 </items>
+                              </MenuButton>
                            </children>
                         </Pane>
                      </children>
