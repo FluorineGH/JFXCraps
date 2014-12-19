@@ -25,7 +25,7 @@ public class JFXCraps extends Application {
        
         Scene scene = new Scene(root, 800, 600);
         
-        stage.setTitle("Jay Craps");
+        stage.setTitle("Jay Craps ~ Version 1.1");
         stage.setScene(scene);
         stage.show();
     }

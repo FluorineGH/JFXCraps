@@ -96,7 +96,7 @@
                         </HBox>
                      </children>
                   </VBox>
-                  <VBox layoutX="6.0" layoutY="385.0" prefHeight="145.0" prefWidth="150.0" spacing="10.0" AnchorPane.bottomAnchor="6.0" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="385.0">
+                  <VBox layoutX="6.0" layoutY="375.0" prefHeight="161.0" prefWidth="150.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="375.0">
                      <children>
                         <HBox alignment="CENTER" layoutX="2.0" layoutY="382.0" prefHeight="25.0" prefWidth="150.0" spacing="10.0" AnchorPane.bottomAnchor="129.0" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="7.0">
                            <children>
@@ -119,16 +119,19 @@
                               <Label fx:id="DCBetLabel" prefWidth="40.0" text="\$0" />
                            </children>
                         </HBox>
+                        <Separator prefWidth="200.0" />
                         <HBox alignment="CENTER" layoutX="6.0" layoutY="492.0" spacing="10.0" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="7.0">
                            <children>
-                              <Label layoutX="6.0" layoutY="496.0" minWidth="-Infinity" prefWidth="70.0" text="DC Lay Odds" />
-                              <Button fx:id="DCLayBetButton" layoutX="109.0" layoutY="492.0" mnemonicParsing="false" onAction="#DCLayButtonAction" prefWidth="50.0" text="Bet" />
-                              <Label fx:id="DCLayBetLabel" prefWidth="40.0" text="\$0" />
+                              <Button fx:id="NewGameButton" mnemonicParsing="false" onAction="#NewGameButtonAction" prefHeight="25.0" prefWidth="81.0" text="New Game" />
+                              <Button fx:id="QuitButton" layoutX="109.0" layoutY="492.0" mnemonicParsing="false" onAction="#QuitButtonAction" prefWidth="50.0" text="Quit" />
                            </children>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
                         </HBox>
                      </children>
                   </VBox>
-                  <Separator layoutX="-23.0" layoutY="368.0" prefWidth="200.0" AnchorPane.leftAnchor="-23.0" AnchorPane.rightAnchor="-17.0" />
+                  <Separator layoutX="-23.0" layoutY="368.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
@@ -295,6 +298,78 @@
                                  <items>
                                     <MenuItem mnemonicParsing="false" onAction="#C10OddsMBMinus" text="Minus" />
                                     <MenuItem mnemonicParsing="false" onAction="#C10OddsMBClear" text="Clear" />
+                                 </items>
+                              </MenuButton>
+                              <MenuButton fx:id="DC4MB" layoutX="185.0" layoutY="81.0" mnemonicParsing="false" opacity="0.0" text="DC4">
+                                 <items>
+                                    <MenuItem mnemonicParsing="false" onAction="#DC4Lay" text="Lay" />
+                                    <MenuItem mnemonicParsing="false" onAction="#DC4Down" text="Down" />
+                                 </items>
+                              </MenuButton>
+                              <MenuButton fx:id="DC4LayMB" layoutX="190.0" layoutY="50.0" mnemonicParsing="false" opacity="0.0" text="44">
+                                <items>
+                                  <MenuItem mnemonicParsing="false" onAction="#DC4Lay" text="Add Lay" />
+                                  <MenuItem mnemonicParsing="false" onAction="#DC4LayDown" text="Down" />
+                                </items>
+                              </MenuButton>
+                              <MenuButton fx:id="DC5MB" layoutX="265.0" layoutY="81.0" mnemonicParsing="false" opacity="0.0" text="DC5">
+                                 <items>
+                                    <MenuItem mnemonicParsing="false" onAction="#DC5Lay" text="Lay" />
+                                    <MenuItem mnemonicParsing="false" onAction="#DC5Down" text="Down" />
+                                 </items>
+                              </MenuButton>
+                              <MenuButton fx:id="DC6MB" layoutX="339.0" layoutY="81.0" mnemonicParsing="false" opacity="0.0" text="DC6">
+                                 <items>
+                                    <MenuItem mnemonicParsing="false" onAction="#DC6Lay" text="Lay" />
+                                    <MenuItem mnemonicParsing="false" onAction="#DC6Down" text="Down" />
+                                 </items>
+                              </MenuButton>
+                              <MenuButton fx:id="DC8MB" layoutX="418.0" layoutY="81.0" mnemonicParsing="false" opacity="0.0" text="DC8">
+                                 <items>
+                                    <MenuItem mnemonicParsing="false" onAction="#DC8Lay" text="Lay" />
+                                    <MenuItem mnemonicParsing="false" onAction="#DC8Down" text="Down" />
+                                 </items>
+                              </MenuButton>
+                              <MenuButton fx:id="DC9MB" layoutX="495.0" layoutY="81.0" mnemonicParsing="false" opacity="0.0" text="DC9">
+                                 <items>
+                                    <MenuItem mnemonicParsing="false" onAction="#DC9Lay" text="Lay" />
+                                    <MenuItem mnemonicParsing="false" onAction="#DC9Down" text="Down" />
+                                 </items>
+                              </MenuButton>
+                              <MenuButton fx:id="DC10MB" layoutX="570.0" layoutY="81.0" mnemonicParsing="false" opacity="0.0" text="DC10">
+                                 <items>
+                                    <MenuItem mnemonicParsing="false" onAction="#DC10Lay" text="Lay" />
+                                    <MenuItem mnemonicParsing="false" onAction="#DC10Down" text="Down" />
+                                 </items>
+                              </MenuButton>
+                              <MenuButton fx:id="DC5LayMB" layoutX="270.0" layoutY="50.0" mnemonicParsing="false" opacity="0.0" text="55">
+                                 <items>
+                                    <MenuItem mnemonicParsing="false" onAction="#DC5Lay" text="Add Lay" />
+                                    <MenuItem mnemonicParsing="false" onAction="#DC5LayDown" text="Down" />
+                                 </items>
+                              </MenuButton>
+                              <MenuButton fx:id="DC6LayMB" layoutX="344.0" layoutY="50.0" mnemonicParsing="false" opacity="0.0" text="66">
+                                 <items>
+                                    <MenuItem mnemonicParsing="false" onAction="#DC6Lay" text="Add Lay" />
+                                    <MenuItem mnemonicParsing="false" onAction="#DC6LayDown" text="Down" />
+                                 </items>
+                              </MenuButton>
+                              <MenuButton fx:id="DC8LayMB" layoutX="422.0" layoutY="50.0" mnemonicParsing="false" opacity="0.0" text="88">
+                                 <items>
+                                    <MenuItem mnemonicParsing="false" onAction="#DC8Lay" text="Add Lay" />
+                                    <MenuItem mnemonicParsing="false" onAction="#DC8LayDown" text="Down" />
+                                 </items>
+                              </MenuButton>
+                              <MenuButton fx:id="DC9LayMB" layoutX="500.0" layoutY="50.0" mnemonicParsing="false" opacity="0.0" text="99">
+                                 <items>
+                                    <MenuItem mnemonicParsing="false" onAction="#DC9Lay" text="Add Lay" />
+                                    <MenuItem mnemonicParsing="false" onAction="#DC9LayDown" text="Down" />
+                                 </items>
+                              </MenuButton>
+                              <MenuButton fx:id="DC10LayMB" layoutX="578.0" layoutY="50.0" mnemonicParsing="false" opacity="0.0" text="10">
+                                 <items>
+                                    <MenuItem mnemonicParsing="false" onAction="#DC10Lay" text="Add Lay" />
+                                    <MenuItem mnemonicParsing="false" onAction="#DC10LayDown" text="Down" />
                                  </items>
                               </MenuButton>
                            </children>
