@@ -4,14 +4,20 @@ package jfxcraps;
 import java.util.Random;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.Pane;
 
 public class FXMLCrapsController {
 
+    @FXML private Button RollButton;
+    
     @FXML private Label OddsBetLabel;
     @FXML private Label EightBetLabel;
     @FXML private Label FieldBetLabel;
@@ -30,6 +36,9 @@ public class FXMLCrapsController {
     @FXML private Label ComeBetLabel;
     @FXML private Label FiveBetLabel;
     @FXML private Label Die1Label;
+    //@FXML private Label VersionLabel;
+    @FXML private Label AccountLabel;
+    @FXML private Label WarningLabel;
  
     @FXML private ImageView DiePic1;
     @FXML private ImageView DiePic2;
@@ -75,6 +84,13 @@ public class FXMLCrapsController {
     @FXML private MenuButton DC9LayMB;
     @FXML private MenuButton DC10LayMB;
     
+    @FXML private TextField nameField;
+    @FXML private PasswordField passField;
+    @FXML private Button LoginButton;
+    @FXML private Button CreateButton;
+    @FXML private Button GuestButton;
+    @FXML private Pane LoginPane;   
+    
 /*    @FXML private Button DPLayBetButton;
     @FXML private Button TenBetButton;
     @FXML private Button FieldBetButton;   
@@ -88,9 +104,9 @@ public class FXMLCrapsController {
     @FXML private Button EightBetButton;
     @FXML private Button DPBetButton;
     @FXML private Button OddsBetButton;
-    @FXML private Button RollButton;
+    
     @FXML private Button NewGameButton;
-    @FXML private Button QuitButton;
+    @FXML private Button QuitButton;   
 */
     
     static int PassBet,OddsBet,FieldBet,ComeBet,FourBet,FiveBet,SixBet,EightBet,
@@ -107,9 +123,19 @@ public class FXMLCrapsController {
     boolean point = false;   
         
     Image ONE,TWO,THREE,FOUR,FIVE,SIX,ON,OFF;
-     
-    public FXMLCrapsController(){
-        BANK = 100;        
+    
+    // Bank Accounts stuff
+    Login log;
+    String Name,Password;
+    static String Accountname;
+    static int Bankroll;
+    static boolean acc = false;
+    Account player;
+    
+    public FXMLCrapsController(){     
+        BANK = 100;
+        Accountname = "Guest";
+        Bankroll = BANK;
         ONE     = new Image(FXMLCrapsController.class.getResourceAsStream("1.png"));
         TWO     = new Image(FXMLCrapsController.class.getResourceAsStream("2.png"));
         THREE   = new Image(FXMLCrapsController.class.getResourceAsStream("3.png"));
@@ -118,15 +144,66 @@ public class FXMLCrapsController {
         SIX     = new Image(FXMLCrapsController.class.getResourceAsStream("6.png"));
         ON      = new Image(FXMLCrapsController.class.getResourceAsStream("on.png"));
         OFF     = new Image(FXMLCrapsController.class.getResourceAsStream("off.png"));
+//        VersionLabel.setText(JFXCraps.VERSION);
+        log = new Login();
     }
     
     Random r = new Random();
+        
+    @FXML void Login(ActionEvent event) {
+        WarningLabel.setText("");        
+        Name = nameField.getText();
+        Password = passField.getText();
+        log.login(Name,Password);
+        if(acc == true){           
+            BANK = Bankroll;
+            BankLabel.setText(Integer.toString(BANK));
+            AccountLabel.setText(Accountname);
+            banish();
+        }else{
+            nameField.clear();
+            passField.clear();
+            WarningLabel.setText("Account not found!" + "\n" +"Check name or password and try again, Create a new account, or click Play as Guest");           
+        }
+    }
     
-    @FXML void QuitButtonAction(ActionEvent event) { 
+    private void banish(){
+        RollButton.setDefaultButton(true);
+        
+        LoginPane.setDisable(true);
+        nameField.setOpacity(0);
+        passField.setOpacity(0);
+        LoginButton.setOpacity(0);
+        CreateButton.setOpacity(0);
+        GuestButton.setOpacity(0);
+        LoginPane.setOpacity(0);
+        WarningLabel.setOpacity(0);
+    }
+    
+     @FXML void CreateAccountAction(ActionEvent event) {
+         // Create a new account
+         Name = nameField.getText();
+         Password = passField.getText();
+         log.newAccount(Name,Password);
+         WarningLabel.setText("Account Created: " + Name);
+     }
+    
+    @FXML void Guest(ActionEvent event) {
+        banish();
+    }
+    
+    @FXML void QuitButtonAction(ActionEvent event) {
+        if(!Accountname.equals("Guest")){
+            BANK += TOTAL;
+            log.updateBank();
+            log.writeAccount();
+            System.out.println("New bank record: " + BANK);
+        }
         System.exit(0);
     }
     
     @FXML void NewGameButtonAction(ActionEvent event) {
+        if(!Accountname.equals("Guest")) return;
         PassBet = 0;
         OddsBet = 0;
         FieldBet = 0;
@@ -200,7 +277,7 @@ public class FXMLCrapsController {
      }
     
     @FXML void PassButtonAction(ActionEvent event) { 
-        if(BANK < 1 || PassBet > 999) return;
+        if(PassBet > 999) return;
         PassBet += 5;
         BANK -= 5;
         TOTAL += 5;        
@@ -270,7 +347,7 @@ public class FXMLCrapsController {
     }   
    
     @FXML void FieldButtonAction(ActionEvent event) {
-        if(BANK < 1 || FieldBet > 999) return;
+        if(FieldBet > 999) return;
         FieldBet += 5;
         BANK -= 5;
         TOTAL += 5;        
@@ -304,7 +381,7 @@ public class FXMLCrapsController {
     }
     
     @FXML void ComeButtonAction(ActionEvent event) {
-        if(BANK < 1 || ComeBet > 999) return;
+        if(ComeBet > 999) return;
         ComeBet += 5;
         BANK -= 5;
         TOTAL += 5;        
@@ -338,7 +415,7 @@ public class FXMLCrapsController {
     }
     
     @FXML void FourBetButtonAction(ActionEvent event) {
-        if(BANK < 1 || FourBet > 999) return;
+        if(FourBet > 999) return;
         FourBet += 5;
         BANK -= 5;
         TOTAL += 5;        
@@ -372,7 +449,7 @@ public class FXMLCrapsController {
     }
     
     @FXML void FiveBetButtonAction(ActionEvent event) {
-        if(BANK < 1 || FiveBet > 999) return;
+        if(FiveBet > 999) return;
         FiveBet += 5;
         BANK -= 5;
         TOTAL += 5;        
@@ -406,7 +483,7 @@ public class FXMLCrapsController {
     }
     
     @FXML void SixBetButtonAction(ActionEvent event) {
-        if(BANK < 1 || SixBet > 999) return;
+        if(SixBet > 999) return;
         SixBet += 6;
         BANK -= 6;
         TOTAL += 6;        
@@ -440,7 +517,7 @@ public class FXMLCrapsController {
     }
     
     @FXML void EightBetButtonAction(ActionEvent event) {
-        if(BANK < 1 || EightBet > 999) return;
+        if(EightBet > 999) return;
         EightBet += 6;
         BANK -= 6;
         TOTAL += 6;        
@@ -474,7 +551,7 @@ public class FXMLCrapsController {
     }
     
     @FXML void NineBetButtonAction(ActionEvent event) {
-        if(BANK < 1 || NineBet > 999) return;
+        if(NineBet > 999) return;
         NineBet += 5;
         BANK -= 5;
         TOTAL += 5;        
@@ -509,7 +586,7 @@ public class FXMLCrapsController {
     }
  
         @FXML void TenBetButtonAction(ActionEvent event) {
-        if(BANK < 1 || TenBet > 999) return;
+        if(TenBet > 999) return;
         TenBet += 5;
         BANK -= 5;
         TOTAL += 5;        
@@ -543,7 +620,7 @@ public class FXMLCrapsController {
     }
     
     @FXML void DPBetButtonAction(ActionEvent event) {
-        if(BANK < 1 || DPBet > 999) return;
+        if(DPBet > 999) return;
         if(point == true) return;
         DPBet += 5;
         BANK -= 5;
@@ -636,7 +713,7 @@ public class FXMLCrapsController {
     }
     
     @FXML void DCBetButtonAction(ActionEvent event) {
-        if(BANK < 1 || DCBet > 999) return;
+        if(DCBet > 999) return;
         if(point == false) return;
         DCBet += 5;
         BANK -= 5;
@@ -670,7 +747,7 @@ public class FXMLCrapsController {
     }
     
     @FXML void RollButtonAction(ActionEvent event) {
-        if(BANK <= 1 && TOTAL == 0) return;
+        if(BANK < 1 && TOTAL == 0) return;
         PassBetLabel.setTextFill(Color.BLACK);
         OddsBetLabel.setTextFill(Color.BLACK);
         ComeBetLabel.setTextFill(Color.BLACK);
@@ -691,7 +768,7 @@ public class FXMLCrapsController {
     private void updateCash(){
         BankLabel.setText("$" + Integer.toString(BANK));
         TotalBetLabel.setText("$" + Integer.toString(TOTAL));
-     
+        
         if(PassBet == 0) PassMB.setOpacity(0);        
         if(OddsBet == 0) OddsMB.setOpacity(0);        
         if(ComeBet == 0) ComeMB.setOpacity(0);        
@@ -2165,6 +2242,6 @@ public class FXMLCrapsController {
         updateCash();
         DC10LayMB.setOpacity(0);
     }
-    
+         
 // END    
 }

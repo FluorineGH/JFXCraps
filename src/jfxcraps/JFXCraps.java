@@ -10,22 +10,18 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
-/**
- *
- * @author jcalvert
- */
 public class JFXCraps extends Application {
+    
+    public static String VERSION = "Version 1.1";
     
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("CrapsFXML.fxml"));
-       
         Scene scene = new Scene(root, 800, 600);
-        
-        stage.setTitle("Jay Craps ~ Version 1.1");
+        stage.setResizable(false);
+        stage.setTitle("Jay Craps ~ " + VERSION);
         stage.setScene(scene);
         stage.show();
     }

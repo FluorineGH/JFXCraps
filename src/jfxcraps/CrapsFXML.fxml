@@ -381,12 +381,22 @@
       </SplitPane>
       <HBox alignment="CENTER" layoutY="1.0" prefHeight="67.0" prefWidth="800.0" spacing="10.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="1.0">
          <children>
-            <HBox alignment="CENTER" layoutX="14.0" layoutY="14.0" prefHeight="50.0" prefWidth="50.0" spacing="10.0" HBox.hgrow="ALWAYS">
+            <VBox prefHeight="50.0" prefWidth="174.0">
                <children>
-                  <Label layoutX="14.0" layoutY="14.0" text="Bank Account:" />
-                  <Label fx:id="BankLabel" layoutX="90.0" layoutY="14.0" text="\$100" />
+                  <HBox alignment="CENTER" layoutX="14.0" layoutY="14.0" prefHeight="50.0" prefWidth="50.0" spacing="10.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <Label layoutX="14.0" layoutY="14.0" text="Account Name:" />
+                        <Label fx:id="AccountLabel" layoutX="90.0" layoutY="14.0" prefHeight="17.0" prefWidth="80.0" text="Guest" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="50.0" prefWidth="50.0" spacing="10.0">
+                     <children>
+                        <Label layoutX="14.0" layoutY="14.0" text="Bank Account:" />
+                        <Label fx:id="BankLabel" layoutX="90.0" layoutY="14.0" prefHeight="17.0" prefWidth="80.0" text="\$100" />
+                     </children>
+                  </HBox>
                </children>
-            </HBox>
+            </VBox>
             <HBox alignment="CENTER" layoutX="157.0" layoutY="14.0" prefWidth="50.0" spacing="10.0" HBox.hgrow="ALWAYS">
                <children>
                   <Label layoutX="157.0" layoutY="14.0" text="Total Bets:" />
@@ -435,5 +445,63 @@
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </padding>
       </HBox>
+      <Pane fx:id="LoginPane" prefHeight="600.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <ImageView pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@splash.png" />
+               </image>
+            </ImageView>
+            <Label alignment="CENTER" layoutX="1.0" layoutY="6.0" prefHeight="70.0" prefWidth="800.0" text="Welcome to Jay Craps!" textFill="#4a00eb">
+               <font>
+                  <Font name="System Bold" size="69.0" />
+               </font>
+               <effect>
+                  <DropShadow color="WHITE" height="41.76" radius="15.932499999999997" width="23.97" />
+               </effect>
+            </Label>
+            <Label fx:id="VersionLabel" alignment="CENTER" layoutX="315.0" layoutY="99.0" prefHeight="25.0" prefWidth="187.0" text="Version 1.1" textFill="#4a00eb">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+               <effect>
+                  <DropShadow color="WHITE" height="38.79" radius="14.4475" spread="0.1" />
+               </effect>
+            </Label>
+            <Label alignment="CENTER_RIGHT" layoutX="264.0" layoutY="210.0" prefHeight="34.0" prefWidth="87.0" text="LOGIN" textFill="#4a00eb">
+               <effect>
+                  <DropShadow color="WHITE" height="29.89" radius="13.705" spread="0.05" width="26.93" />
+               </effect>
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER_RIGHT" layoutX="204.0" layoutY="248.0" prefHeight="35.0" prefWidth="150.0" text="PASSWORD" textFill="#4a00eb">
+               <effect>
+                  <DropShadow color="WHITE" height="29.89" radius="13.705" spread="0.05" width="26.93" />
+               </effect>
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <TextField fx:id="nameField" layoutX="363.0" layoutY="215.0" promptText="Name" />
+            <PasswordField fx:id="passField" layoutX="363.0" layoutY="253.0" promptText="Password" />
+            <VBox layoutX="363.0" layoutY="300.0" spacing="20.0">
+               <children>
+                  <Button fx:id="LoginButton" layoutX="363.0" layoutY="300.0" mnemonicParsing="false" onAction="#Login" prefHeight="25.0" prefWidth="149.0" text="Login" />
+                  <Button fx:id="CreateButton" layoutX="363.0" layoutY="348.0" mnemonicParsing="false" onAction="#CreateAccountAction" prefHeight="25.0" prefWidth="149.0" text="Create New Account" />
+                  <Button fx:id="GuestButton" layoutX="363.0" layoutY="395.0" mnemonicParsing="false" onAction="#Guest" prefHeight="25.0" prefWidth="149.0" text="Play as Guest" />
+               </children>
+            </VBox>
+            <Label fx:id="WarningLabel" alignment="TOP_LEFT" layoutX="536.0" layoutY="214.0" prefHeight="183.0" prefWidth="222.0" textFill="RED" wrapText="true">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+               <effect>
+                  <DropShadow color="#2b03ff" />
+               </effect>
+            </Label>
+         </children>
+      </Pane>
    </children>
 </AnchorPane>
