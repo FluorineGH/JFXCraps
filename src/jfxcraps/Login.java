@@ -40,6 +40,7 @@ public class Login {
             fileIn.close();
         }catch(IOException e){
             System.err.println("IO Error: File not found. No scores for you!");
+            //e.printStackTrace();
             return;
         }catch(ClassNotFoundException cnf){
             cnf.printStackTrace();
@@ -52,6 +53,7 @@ public class Login {
             System.out.println("Name: " + player.getName());
             System.out.println("Password: " + player.getPassword());
             System.out.println("Bankroll: " + player.getBankroll());
+            System.out.println("Balance: " + player.getBalance());
         }               
     }
     
@@ -68,10 +70,17 @@ public class Login {
         }
     }
     
-    public void newAccount(String n, String p){
-        accounts.add(new Account(n,p,100));
+    public boolean newAccount(String n, String p){
+        for(int i = 0;i<accounts.size();i++){
+            player = (Account)accounts.get(i);
+            if(n.equals(player.getName())){
+                return false;
+            }
+        }
+        accounts.add(new Account(n,p,100,0));
         System.out.println("accounts size: " + accounts.size());
         writeAccount();
+        return true;
     }
 
     public void login(String n, String p){
@@ -82,6 +91,7 @@ public class Login {
                     System.out.println("Welcome " + player.getName() + "!");
                     FXMLCrapsController.Accountname = player.getName();
                     FXMLCrapsController.Bankroll = player.getBankroll();
+                    FXMLCrapsController.Balance = player.getBalance();
                     FXMLCrapsController.acc = true;
                     return;
                 }
@@ -95,6 +105,7 @@ public class Login {
             player = (Account) accounts.get(i);
             if(FXMLCrapsController.Accountname.equals(player.getName())){
                 player.setBankroll(FXMLCrapsController.BANK);
+                player.setBalance(FXMLCrapsController.Balance);
             }
         }
     }

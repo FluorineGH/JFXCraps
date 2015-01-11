@@ -17,7 +17,8 @@ import javafx.scene.layout.Pane;
 public class FXMLCrapsController {
 
     @FXML private Button RollButton;
-    
+
+    //@FXML private Label VersionLabel;
     @FXML private Label OddsBetLabel;
     @FXML private Label EightBetLabel;
     @FXML private Label FieldBetLabel;
@@ -36,10 +37,24 @@ public class FXMLCrapsController {
     @FXML private Label ComeBetLabel;
     @FXML private Label FiveBetLabel;
     @FXML private Label Die1Label;
-    //@FXML private Label VersionLabel;
     @FXML private Label AccountLabel;
     @FXML private Label WarningLabel;
- 
+    @FXML private Label StatusLabel;
+    
+    @FXML private Label No4BetLabel;
+    @FXML private Label No10BetLabel;
+    @FXML private Label BalanceLabel;
+    @FXML private Label AnyCrapsBetLabel;
+    @FXML private Label Any7BetLabel;
+    @FXML private Label TwoBetLabel;
+    @FXML private Label ThreeBetLabel;
+    @FXML private Label ElevenBetLabel;
+    @FXML private Label TwelveBetLabel;
+    @FXML private Label Hard6BetLabel;
+    @FXML private Label Hard8BetLabel;
+    @FXML private Label Hard4BetLabel;
+    @FXML private Label Hard10BetLabel;
+    
     @FXML private ImageView DiePic1;
     @FXML private ImageView DiePic2;
     @FXML private ImageView PuckPic;
@@ -84,6 +99,20 @@ public class FXMLCrapsController {
     @FXML private MenuButton DC9LayMB;
     @FXML private MenuButton DC10LayMB;
     
+    @FXML private MenuButton No4BetMB;
+    @FXML private MenuButton No10BetMB;
+    @FXML private MenuButton AnyCrapsBetMB;
+    @FXML private MenuButton Any7BetMB;
+    @FXML private MenuButton TwoBetMB;
+    @FXML private MenuButton ThreeBetMB;
+    @FXML private MenuButton ElevenBetMB;
+    @FXML private MenuButton TwelveBetMB;
+    @FXML private MenuButton Hard6BetMB;
+    @FXML private MenuButton Hard8BetMB;
+    @FXML private MenuButton Hard4BetMB;
+    @FXML private MenuButton Hard10BetMB;
+    
+    // Login Stuff
     @FXML private TextField nameField;
     @FXML private PasswordField passField;
     @FXML private Button LoginButton;
@@ -104,10 +133,25 @@ public class FXMLCrapsController {
     @FXML private Button EightBetButton;
     @FXML private Button DPBetButton;
     @FXML private Button OddsBetButton;
+    @FXML private Button No4BetButton;
+    @FXML private Button No10BetButton;
+    @FXML private Button BorrowButton;
+    @FXML private Button RepayButton;
+    @FXML private Button AnyCrapsBetButton;
+    @FXML private Button Any7BetButton;
+    @FXML private Button TwoBetButton;
+    @FXML private Button ThreeBetButton;
+    @FXML private Button ElevenBetButton;
+    @FXML private Button TwelveBetButton;
+    @FXML private Button Hard6BetButton;
+    @FXML private Button Hard8BetButton;
+    @FXML private Button Hard4BetButton;
+    @FXML private Button Hard10BetButton;
+*/   
     
     @FXML private Button NewGameButton;
     @FXML private Button QuitButton;   
-*/
+
     
     static int PassBet,OddsBet,FieldBet,ComeBet,FourBet,FiveBet,SixBet,EightBet,
             NineBet,TenBet,DPBet,DPLayBet;
@@ -117,6 +161,11 @@ public class FXMLCrapsController {
     
     static int DC4Bet,DC5Bet,DC6Bet,DC8Bet,DC9Bet,DC10Bet,DC4LayBet,
             DC5LayBet,DC6LayBet,DC8LayBet,DC9LayBet,DC10LayBet;
+    
+    static int No4Bet,No10Bet,AnyCrapsBet,Any7Bet,TwoBet,ThreeBet,ElevenBet,
+            TwelveBet,Hard6Bet,Hard8Bet,Hard4Bet,Hard10Bet;
+    
+    static boolean Hard6OFF,Hard8OFF,Hard4OFF,Hard10OFF;
     
     static int DontPay,Die1,Die2,ROLL,POINT,BANK,TOTAL;   
     
@@ -129,13 +178,15 @@ public class FXMLCrapsController {
     String Name,Password;
     static String Accountname;
     static int Bankroll;
+    static int Balance;
     static boolean acc = false;
     Account player;
-    
+        
     public FXMLCrapsController(){     
         BANK = 100;
         Accountname = "Guest";
         Bankroll = BANK;
+        Balance = 0;
         ONE     = new Image(FXMLCrapsController.class.getResourceAsStream("1.png"));
         TWO     = new Image(FXMLCrapsController.class.getResourceAsStream("2.png"));
         THREE   = new Image(FXMLCrapsController.class.getResourceAsStream("3.png"));
@@ -144,12 +195,16 @@ public class FXMLCrapsController {
         SIX     = new Image(FXMLCrapsController.class.getResourceAsStream("6.png"));
         ON      = new Image(FXMLCrapsController.class.getResourceAsStream("on.png"));
         OFF     = new Image(FXMLCrapsController.class.getResourceAsStream("off.png"));
-//        VersionLabel.setText(JFXCraps.VERSION);
         log = new Login();
-    }
+//        VersionLabel.setText(JFXCraps.VERSION);
+        Hard6OFF = true;
+        Hard8OFF = true;
+        Hard4OFF = true;
+        Hard10OFF = true;
+   }
     
     Random r = new Random();
-        
+    
     @FXML void Login(ActionEvent event) {
         WarningLabel.setText("");        
         Name = nameField.getText();
@@ -159,17 +214,18 @@ public class FXMLCrapsController {
             BANK = Bankroll;
             BankLabel.setText(Integer.toString(BANK));
             AccountLabel.setText(Accountname);
+            BalanceLabel.setText(Integer.toString(Balance));
+            NewGameButton.setOpacity(0);
             banish();
         }else{
-            nameField.clear();
             passField.clear();
             WarningLabel.setText("Account not found!" + "\n" +"Check name or password and try again, Create a new account, or click Play as Guest");           
         }
     }
     
     private void banish(){
+        LoginButton.setDefaultButton(false);
         RollButton.setDefaultButton(true);
-        
         LoginPane.setDisable(true);
         nameField.setOpacity(0);
         passField.setOpacity(0);
@@ -181,15 +237,36 @@ public class FXMLCrapsController {
     }
     
      @FXML void CreateAccountAction(ActionEvent event) {
-         // Create a new account
+         if(nameField.getText().equals("")) return;
          Name = nameField.getText();
          Password = passField.getText();
-         log.newAccount(Name,Password);
-         WarningLabel.setText("Account Created: " + Name);
+         boolean ok = log.newAccount(Name,Password);
+         if(ok == true)WarningLabel.setText("Account Created: " + Name);
+         else WarningLabel.setText("Account " + Name + " already exists.");
      }
     
     @FXML void Guest(ActionEvent event) {
         banish();
+    }
+    
+    @FXML void BorrowButtonAction(ActionEvent event) {
+        if(BANK > 99) return;
+        Balance -= 100;
+        BANK += 100;
+        BalanceLabel.setTextFill(Color.RED);
+        BankLabel.setTextFill(Color.GREEN);
+        updateCash();
+        StatusLabel.setText("Borrowed $100.");
+    }
+    
+    @FXML void RepayButtonAction(ActionEvent event) {
+        if(BANK < 100) return;
+        Balance += 100;
+        BANK -= 100;
+        BankLabel.setTextFill(Color.RED);
+        BalanceLabel.setTextFill(Color.GREEN);
+        updateCash();
+        StatusLabel.setText("Repaid $100.");
     }
     
     @FXML void QuitButtonAction(ActionEvent event) {
@@ -198,6 +275,7 @@ public class FXMLCrapsController {
             log.updateBank();
             log.writeAccount();
             System.out.println("New bank record: " + BANK);
+            System.out.println("Bank balance: " + Balance);
         }
         System.exit(0);
     }
@@ -242,6 +320,18 @@ public class FXMLCrapsController {
         DC8LayBet = 0;
         DC9LayBet = 0;
         DC10LayBet = 0;
+        No4Bet = 0;
+        No10Bet = 0;
+        AnyCrapsBet = 0;
+        Any7Bet = 0;
+        TwoBet = 0;
+        ThreeBet = 0;
+        ElevenBet = 0;
+        TwelveBet = 0;
+        Hard6Bet = 0;
+        Hard8Bet = 0;
+        Hard4Bet = 0;
+        Hard10Bet = 0;
         DontPay = 0;
         Die1 = 0;
         Die2 = 0;
@@ -264,6 +354,18 @@ public class FXMLCrapsController {
         DPBetLabel.setTextFill(Color.BLACK);
         DPLayBetLabel.setTextFill(Color.BLACK);
         DCBetLabel.setTextFill(Color.BLACK);
+        No4BetLabel.setTextFill(Color.BLACK);
+        No10BetLabel.setTextFill(Color.BLACK);
+        AnyCrapsBetLabel.setTextFill(Color.BLACK);
+        Any7BetLabel.setTextFill(Color.BLACK);
+        TwoBetLabel.setTextFill(Color.BLACK);
+        ThreeBetLabel.setTextFill(Color.BLACK);
+        ElevenBetLabel.setTextFill(Color.BLACK);
+        TwelveBetLabel.setTextFill(Color.BLACK);
+        Hard6BetLabel.setTextFill(Color.BLACK);
+        Hard8BetLabel.setTextFill(Color.BLACK);
+        Hard4BetLabel.setTextFill(Color.BLACK);
+        Hard10BetLabel.setTextFill(Color.BLACK);       
         
         updateCash();
         
@@ -274,9 +376,20 @@ public class FXMLCrapsController {
         DiePic2.setOpacity(0);
         PuckPic.setX(0);
         PuckPic.setImage(OFF);
+        StatusLabel.setText("");
+        StatusLabel.setOpacity(0);
      }
     
-    @FXML void PassButtonAction(ActionEvent event) { 
+    private void broke(){
+        StatusLabel.setOpacity(1);
+        StatusLabel.setText("Insufficient Funds! Borrow from the Bank.");
+    }
+    
+    @FXML void PassButtonAction(ActionEvent event) {
+        if(BANK < 5){
+            broke();
+            return;
+        }
         if(PassBet > 999) return;
         PassBet += 5;
         BANK -= 5;
@@ -311,7 +424,10 @@ public class FXMLCrapsController {
     }
     
     @FXML void OddsButtonAction(ActionEvent event) {
-        if(BANK < 1) return;
+        if(BANK < 5){
+            broke();
+            return;
+        }
         if(point == false || PassBet == 0) return;
         if(OddsBet >= PassBet*2) return;
         OddsBet += 5;
@@ -347,6 +463,10 @@ public class FXMLCrapsController {
     }   
    
     @FXML void FieldButtonAction(ActionEvent event) {
+        if(BANK < 5){
+            broke();
+            return;
+        }
         if(FieldBet > 999) return;
         FieldBet += 5;
         BANK -= 5;
@@ -381,6 +501,10 @@ public class FXMLCrapsController {
     }
     
     @FXML void ComeButtonAction(ActionEvent event) {
+        if(BANK < 5){
+            broke();
+            return;
+        }
         if(ComeBet > 999) return;
         ComeBet += 5;
         BANK -= 5;
@@ -415,6 +539,10 @@ public class FXMLCrapsController {
     }
     
     @FXML void FourBetButtonAction(ActionEvent event) {
+        if(BANK < 5){
+            broke();
+            return;
+        }
         if(FourBet > 999) return;
         FourBet += 5;
         BANK -= 5;
@@ -449,6 +577,10 @@ public class FXMLCrapsController {
     }
     
     @FXML void FiveBetButtonAction(ActionEvent event) {
+        if(BANK < 5){
+            broke();
+            return;
+        }
         if(FiveBet > 999) return;
         FiveBet += 5;
         BANK -= 5;
@@ -483,6 +615,10 @@ public class FXMLCrapsController {
     }
     
     @FXML void SixBetButtonAction(ActionEvent event) {
+        if(BANK < 6){
+            broke();
+            return;
+        }
         if(SixBet > 999) return;
         SixBet += 6;
         BANK -= 6;
@@ -517,6 +653,10 @@ public class FXMLCrapsController {
     }
     
     @FXML void EightBetButtonAction(ActionEvent event) {
+        if(BANK < 6){
+            broke();
+            return;
+        }
         if(EightBet > 999) return;
         EightBet += 6;
         BANK -= 6;
@@ -551,6 +691,10 @@ public class FXMLCrapsController {
     }
     
     @FXML void NineBetButtonAction(ActionEvent event) {
+        if(BANK < 5){
+            broke();
+            return;
+        }
         if(NineBet > 999) return;
         NineBet += 5;
         BANK -= 5;
@@ -586,6 +730,10 @@ public class FXMLCrapsController {
     }
  
         @FXML void TenBetButtonAction(ActionEvent event) {
+        if(BANK < 5){
+            broke();
+            return;
+        }
         if(TenBet > 999) return;
         TenBet += 5;
         BANK -= 5;
@@ -620,6 +768,10 @@ public class FXMLCrapsController {
     }
     
     @FXML void DPBetButtonAction(ActionEvent event) {
+        if(BANK < 5){
+            broke();
+            return;
+        }
         if(DPBet > 999) return;
         if(point == true) return;
         DPBet += 5;
@@ -653,10 +805,18 @@ public class FXMLCrapsController {
         DPMB.setOpacity(0);
     }
         
-    @FXML void DPLayButtonAction(ActionEvent event) {
-        if(BANK < 1) return;
+    @FXML void DPLayButtonAction(ActionEvent event) { 
+        
         if(POINT == 0 || DPBet == 0) return;
         if(POINT == 5 || POINT == 9){
+            if(DPLayBet == 0 && BANK < 9){
+                broke();
+                return;
+            }
+            if(DPLayBet >9 && BANK < 1){
+                broke();
+                return;
+            }
             if(DPLayBet >= DPBet*3) return;
             if(DPLayBet == 0) {
                 DPLayBet += 9;
@@ -667,6 +827,10 @@ public class FXMLCrapsController {
                 TOTAL += 3;
             }
         }else{
+            if(BANK < DontPay){
+                broke();
+                return;
+            }
             if(POINT == 4 || POINT == 10) if(DPLayBet>=DPBet*4) return;
             if(POINT == 6 || POINT == 8) if(DPLayBet>=DPBet*2.4) return;
             DPLayBet += DontPay;
@@ -715,6 +879,10 @@ public class FXMLCrapsController {
     @FXML void DCBetButtonAction(ActionEvent event) {
         if(DCBet > 999) return;
         if(point == false) return;
+        if(BANK < 5){
+            broke();
+            return;
+        }
         DCBet += 5;
         BANK -= 5;
         TOTAL += 5;        
@@ -747,7 +915,14 @@ public class FXMLCrapsController {
     }
     
     @FXML void RollButtonAction(ActionEvent event) {
-        if(BANK < 1 && TOTAL == 0) return;
+        if(BANK < 1 && TOTAL == 0){
+            StatusLabel.setText("Insufficient Funds.");
+            return;
+        }
+        if(PassBet < 5 && DPBet < 5){
+            StatusLabel.setText("No Line bets!");
+            return;
+        }
         PassBetLabel.setTextFill(Color.BLACK);
         OddsBetLabel.setTextFill(Color.BLACK);
         ComeBetLabel.setTextFill(Color.BLACK);
@@ -761,6 +936,18 @@ public class FXMLCrapsController {
         DPBetLabel.setTextFill(Color.BLACK);
         DPLayBetLabel.setTextFill(Color.BLACK);
         DCBetLabel.setTextFill(Color.BLACK);
+        No4BetLabel.setTextFill(Color.BLACK);
+        No10BetLabel.setTextFill(Color.BLACK);
+        AnyCrapsBetLabel.setTextFill(Color.BLACK);
+        Any7BetLabel.setTextFill(Color.BLACK);
+        TwoBetLabel.setTextFill(Color.BLACK);
+        ThreeBetLabel.setTextFill(Color.BLACK);
+        ElevenBetLabel.setTextFill(Color.BLACK);
+        TwelveBetLabel.setTextFill(Color.BLACK);
+        Hard6BetLabel.setTextFill(Color.BLACK);
+        Hard8BetLabel.setTextFill(Color.BLACK);
+        Hard4BetLabel.setTextFill(Color.BLACK);
+        Hard10BetLabel.setTextFill(Color.BLACK);
         work();       
         updateCash(); // Needed?
     }
@@ -768,7 +955,9 @@ public class FXMLCrapsController {
     private void updateCash(){
         BankLabel.setText("$" + Integer.toString(BANK));
         TotalBetLabel.setText("$" + Integer.toString(TOTAL));
-        
+        BalanceLabel.setText("$" + Integer.toString(Balance));
+        StatusLabel.setText("");
+        StatusLabel.setOpacity(0);
         if(PassBet == 0) PassMB.setOpacity(0);        
         if(OddsBet == 0) OddsMB.setOpacity(0);        
         if(ComeBet == 0) ComeMB.setOpacity(0);        
@@ -782,7 +971,6 @@ public class FXMLCrapsController {
         if(DPBet == 0) DPMB.setOpacity(0);
         if(DPLayBet == 0) DPLayMB.setOpacity(0);
         if(DCBet == 0) DCMB.setOpacity(0);
-        //if(DCLayBet == 0) DCLayMB.setOpacity(0);
         if(C4Bet == 0) C4MB.setOpacity(0);
         if(C5Bet == 0) C5MB.setOpacity(0);
         if(C6Bet == 0) C6MB.setOpacity(0);
@@ -807,13 +995,23 @@ public class FXMLCrapsController {
         if(DC8LayBet == 0) DC8LayMB.setOpacity(0);
         if(DC9LayBet == 0) DC9LayMB.setOpacity(0);
         if(DC10LayBet == 0) DC10LayMB.setOpacity(0);
+        if(No4Bet == 0) No4BetMB.setOpacity(0);
+        if(No10Bet == 0) No10BetMB.setOpacity(0);
+        if(AnyCrapsBet == 0) AnyCrapsBetMB.setOpacity(0);
+        if(Any7Bet == 0) Any7BetMB.setOpacity(0);
+        if(TwoBet == 0) TwoBetMB.setOpacity(0);
+        if(ThreeBet == 0) ThreeBetMB.setOpacity(0);
+        if(ElevenBet == 0) ElevenBetMB.setOpacity(0);
+        if(TwelveBet == 0) TwelveBetMB.setOpacity(0);
+        if(Hard6Bet == 0) Hard6BetMB.setOpacity(0);
+        if(Hard8Bet == 0) Hard8BetMB.setOpacity(0);
+        if(Hard4Bet == 0) Hard4BetMB.setOpacity(0);
+        if(Hard10Bet == 0) Hard10BetMB.setOpacity(0);
     }
     
     private void setLay(){       
-        System.out.println("setLay POINT: " + POINT);
         if(POINT == 4 || POINT == 10) DontPay = 10;
         if(POINT == 6 || POINT == 8) DontPay = 6;
-        System.out.println("setLay DontPay: " + DontPay);
     }
         
     private int rollDie(){
@@ -821,10 +1019,6 @@ public class FXMLCrapsController {
     }
     
     private void work(){
-        if(PassBet < 5 && DPBet < 5) {
-            System.out.println("No Line Bets!");
-            return;
-        }
         Die1 = rollDie();
         Die2 = rollDie();
         ROLL = Die1 + Die2;
@@ -872,6 +1066,10 @@ public class FXMLCrapsController {
                         PassBetLabel.setTextFill(Color.RED);
                         BANK += DPBet;
                         BANK += FieldBet*2;
+                        // Centre Action
+                        if(TwoBet > 0 ) BANK += TwoBet * 30;
+                        if(AnyCrapsBet > 0 ) BANK += AnyCrapsBet * 8;                       
+                        payNone();                        
                         break;
                 
                 case 3: TOTAL -= PassBet;
@@ -880,10 +1078,15 @@ public class FXMLCrapsController {
                         PassBetLabel.setTextFill(Color.RED);
                         BANK += DPBet;
                         BANK += FieldBet;
+                        // Centre Action
+                        if(ThreeBet > 0 ) BANK += ThreeBet * 15;
+                        if(AnyCrapsBet > 0 ) BANK += AnyCrapsBet * 8;                       
+                        payNone();
                         break;
                 
                 case 4: POINT = 4;
                         point = true;
+                        workBets();
                         PointLabel.setText(Integer.toString(POINT));
                         BANK += FieldBet;
                         if(C4Bet > 0){
@@ -902,12 +1105,35 @@ public class FXMLCrapsController {
                             DC4MB.setOpacity(0);
                             DC4LayMB.setOpacity(0);
                         }
-                        PuckPic.setX(78);
+                        PuckPic.setX(99);
                         PuckPic.setImage(ON);
+                        payNone();
+                        if(Hard4OFF == false && Hard4Bet > 0){
+                            if(Die1 == 2 && Die2 == 2){
+                                BANK += Hard4Bet * 7;
+                            }
+                            else{
+                                TOTAL -= Hard4Bet;
+                                Hard4Bet = 0;
+                                Hard4BetLabel.setTextFill(Color.RED);
+                                Hard4BetLabel.setText("$" + Integer.toString(Hard4Bet));
+                                Hard4BetMB.setText("$" + Integer.toString(Hard4Bet));
+                                Hard4BetMB.setOpacity(0);
+                            }
+                        }
+                        if(No4Bet > 0){
+                            TOTAL -= No4Bet;
+                            No4Bet = 0;
+                            No4BetLabel.setTextFill(Color.RED);
+                            No4BetLabel.setText("$" + Integer.toString(No4Bet));
+                            No4BetMB.setText("$" + Integer.toString(No4Bet));
+                            No4BetMB.setOpacity(0);
+                        }
                         break;
                 
                 case 5: POINT = 5;
                         point = true;
+                        workBets();
                         PointLabel.setText(Integer.toString(POINT));
                         if(FieldBet>0) {
                             TOTAL -= FieldBet;
@@ -931,12 +1157,14 @@ public class FXMLCrapsController {
                             DC5MB.setOpacity(0);
                             DC5LayMB.setOpacity(0);
                         }
-                        PuckPic.setX(156);
+                        PuckPic.setX(196);
                         PuckPic.setImage(ON);
+                        payNone();
                         break;
                 
                 case 6: POINT = 6;
                         point = true;
+                        workBets();
                         PointLabel.setText(Integer.toString(POINT));                        
                         if(FieldBet>0) {
                             TOTAL -= FieldBet;
@@ -960,12 +1188,27 @@ public class FXMLCrapsController {
                             DC6MB.setOpacity(0);
                             DC6LayMB.setOpacity(0);
                         }
-                        PuckPic.setX(231);
+                        PuckPic.setX(294);
                         PuckPic.setImage(ON);
+                        payNone();
+                        if(Hard6OFF == false && Hard6Bet > 0){
+                            if(Die1 == 3 && Die2 == 3){
+                                BANK += Hard6Bet * 9;
+                            }
+                            else{
+                                TOTAL -= Hard6Bet;
+                                Hard6Bet = 0;
+                                Hard6BetLabel.setTextFill(Color.RED);
+                                Hard6BetLabel.setText("$" + Integer.toString(Hard6Bet));
+                                Hard6BetMB.setText("$" + Integer.toString(Hard6Bet));
+                                Hard6BetMB.setOpacity(0);
+                            }
+                        }
                         break;
 
                 case 8: POINT = 8;
                         point = true;
+                        workBets();
                         PointLabel.setText(Integer.toString(POINT));
                         if(FieldBet>0) {
                             TOTAL -= FieldBet;
@@ -989,12 +1232,27 @@ public class FXMLCrapsController {
                             DC8MB.setOpacity(0);
                             DC8LayMB.setOpacity(0);
                         }
-                        PuckPic.setX(311);
+                        PuckPic.setX(392);
                         PuckPic.setImage(ON);
+                        payNone();
+                        if(Hard8OFF == false && Hard8Bet > 0){
+                            if(Die1 == 4 && Die2 == 4){
+                                BANK += Hard8Bet * 9;
+                            }
+                            else{
+                                TOTAL -= Hard8Bet;
+                                Hard8Bet = 0;
+                                Hard8BetLabel.setTextFill(Color.RED);
+                                Hard8BetLabel.setText("$" + Integer.toString(Hard8Bet));
+                                Hard8BetMB.setText("$" + Integer.toString(Hard8Bet));
+                                Hard8BetMB.setOpacity(0);
+                            }
+                        }
                         break;
                    
                 case 9: POINT = 9;
                         point = true;
+                        workBets();
                         PointLabel.setText(Integer.toString(POINT));
                         BANK += FieldBet;
                         if(C9Bet > 0){
@@ -1013,12 +1271,14 @@ public class FXMLCrapsController {
                             DC9MB.setOpacity(0);
                             DC9LayMB.setOpacity(0);
                         }
-                        PuckPic.setX(388);
+                        PuckPic.setX(492);
                         PuckPic.setImage(ON);
+                        payNone();
                         break;
                          
                 case 10: POINT = 10;
                          point = true;
+                         workBets();
                          PointLabel.setText(Integer.toString(POINT));
                          BANK += FieldBet;
                          if(C10Bet > 0){
@@ -1037,8 +1297,30 @@ public class FXMLCrapsController {
                             DC10MB.setOpacity(0);
                             DC10LayMB.setOpacity(0);
                         }
-                         PuckPic.setX(465);
+                         PuckPic.setX(591);
                          PuckPic.setImage(ON);
+                         payNone();
+                         if(Hard10OFF == false && Hard10Bet > 0){
+                            if(Die1 == 5 && Die2 == 5){
+                                BANK += Hard10Bet * 7;
+                            }
+                            else{
+                                TOTAL -= Hard10Bet;
+                                Hard10Bet = 0;
+                                Hard10BetLabel.setTextFill(Color.RED);
+                                Hard10BetLabel.setText("$" + Integer.toString(Hard10Bet));
+                                Hard10BetMB.setText("$" + Integer.toString(Hard10Bet));
+                                Hard10BetMB.setOpacity(0);
+                            }
+                        }
+                         if(No10Bet > 0){
+                            TOTAL -= No10Bet;
+                            No10Bet = 0;
+                            No10BetLabel.setTextFill(Color.RED);
+                            No10BetLabel.setText("$" + Integer.toString(No10Bet));
+                            No10BetMB.setText("$" + Integer.toString(No10Bet));
+                            No10BetMB.setOpacity(0);
+                        }
                          break;                        
  
                 case 11: TOTAL -= DPBet;
@@ -1047,13 +1329,21 @@ public class FXMLCrapsController {
                          DPBetLabel.setTextFill(Color.RED);
                          BANK += PassBet;
                          BANK += FieldBet;
-                         break;    
+                         // Centre Action
+                         // Centre Action
+                         if(ElevenBet > 0 ) BANK += ElevenBet * 15;
+                         payNone();
+                         break;
  
                 case 12: TOTAL -= PassBet;
                          PassBet = 0;
                          PassBetLabel.setText("$" + Integer.toString(PassBet));
                          PassBetLabel.setTextFill(Color.RED);
                          BANK += FieldBet*2;
+                         // Centre Action
+                         if(TwelveBet > 0 ) BANK += TwelveBet * 30;
+                         if(AnyCrapsBet > 0 ) BANK += AnyCrapsBet * 8;                       
+                         payNone();
                          break;
                                    
                 case 7: BANK += PassBet; 
@@ -1102,7 +1392,59 @@ public class FXMLCrapsController {
                          DC8LayBet = 0;
                          DC9LayBet = 0;
                          DC10LayBet = 0;
-                         
+                         // Centre Action
+                         int t7 = Any7Bet;
+                         payNone();
+                         Any7Bet = t7;
+                         BANK  += Any7Bet * 4;
+                         if(Hard4OFF == false && Hard4Bet > 0){
+                            TOTAL -= Hard4Bet;
+                            Hard4Bet = 0;
+                            Hard4BetLabel.setTextFill(Color.RED);
+                            Hard4BetLabel.setText("$" + Integer.toString(Hard4Bet));
+                            Hard4BetMB.setText("$" + Integer.toString(Hard4Bet));
+                            Hard4BetMB.setOpacity(0);                            
+                         }
+                         if(Hard6OFF == false && Hard6Bet > 0){
+                            TOTAL -= Hard6Bet;
+                            Hard6Bet = 0;
+                            Hard6BetLabel.setTextFill(Color.RED);
+                            Hard6BetLabel.setText("$" + Integer.toString(Hard6Bet));
+                            Hard6BetMB.setText("$" + Integer.toString(Hard6Bet));
+                            Hard6BetMB.setOpacity(0);                            
+                         }
+                         if(Hard8OFF == false && Hard8Bet > 0){
+                            TOTAL -= Hard8Bet;
+                            Hard8Bet = 0;
+                            Hard8BetLabel.setTextFill(Color.RED);
+                            Hard8BetLabel.setText("$" + Integer.toString(Hard8Bet));
+                            Hard8BetMB.setText("$" + Integer.toString(Hard8Bet));
+                            Hard8BetMB.setOpacity(0);                            
+                         }
+                         if(Hard10OFF == false && Hard10Bet > 0){
+                            TOTAL -= Hard10Bet;
+                            Hard10Bet = 0;
+                            Hard10BetLabel.setTextFill(Color.RED);
+                            Hard10BetLabel.setText("$" + Integer.toString(Hard10Bet));
+                            Hard10BetMB.setText("$" + Integer.toString(Hard10Bet));
+                            Hard10BetMB.setOpacity(0);                            
+                         }
+                         if(No4Bet > 0){
+                             TOTAL -= No4Bet;
+                             BANK += No4Bet * 1.5;
+                             No4Bet = 0;
+                             No4BetLabel.setText("$" + Integer.toString(No4Bet));
+                             No4BetMB.setText("$" + Integer.toString(No4Bet));
+                             No4BetMB.setOpacity(0);
+                         }
+                         if(No10Bet > 0){
+                             TOTAL -= No10Bet;
+                             BANK += No10Bet * 1.5;
+                             No10Bet = 0;
+                             No10BetLabel.setText("$" + Integer.toString(No10Bet));
+                             No10BetMB.setText("$" + Integer.toString(No10Bet));
+                             No10BetMB.setOpacity(0);
+                         }
                          break;  
             }
             
@@ -1118,6 +1460,10 @@ public class FXMLCrapsController {
                         }
                         BANK += FieldBet*2;
                         BANK += DCBet;
+                        // Centre Action
+                        if(TwoBet > 0 ) BANK += TwoBet * 30;
+                        if(AnyCrapsBet > 0 ) BANK += AnyCrapsBet * 8;                       
+                        payNone();
                         break;
                     
                 case 3: if(ComeBet>0) {
@@ -1128,6 +1474,10 @@ public class FXMLCrapsController {
                         }
                         BANK += FieldBet;
                         BANK += DCBet;
+                        // Centre Action
+                        if(ThreeBet > 0 ) BANK += ThreeBet * 15;
+                        if(AnyCrapsBet > 0 ) BANK += AnyCrapsBet * 8;                       
+                        payNone();
                         break;
                     
                 case 4: if(DC4Bet > 0){
@@ -1196,7 +1546,30 @@ public class FXMLCrapsController {
                             C4MB.setText(Integer.toString(C4Bet));
                             ComeMB.setOpacity(0);
                         }
-                        BANK += FourBet/5*9;                       
+                        BANK += FourBet/5*9;
+                        payNone();
+                        if(Hard4OFF == false){
+                            if(Die1 == 2 && Die2 == 2){
+                                BANK += Hard4Bet * 7;
+                            }
+                            else{
+                                TOTAL -= Hard4Bet;
+                                Hard4Bet = 0;
+                                Hard4BetLabel.setTextFill(Color.RED);
+                                Hard4BetLabel.setText("$" + Integer.toString(Hard4Bet));
+                                Hard4BetMB.setText("$" + Integer.toString(Hard4Bet));
+                                Hard4BetMB.setOpacity(0);
+                            }
+                        }
+                        if(No4Bet > 0){
+                            TOTAL -= No4Bet;
+                            No4Bet = 0;
+                            No4BetLabel.setTextFill(Color.RED);
+                            No4BetLabel.setText("$" + Integer.toString(No4Bet));
+                            No4BetMB.setText("$" + Integer.toString(No4Bet));
+                            No4BetMB.setOpacity(0);
+                        }
+                        workBets();
                         break;
                     
                 case 5: if(DC5Bet > 0){
@@ -1271,6 +1644,8 @@ public class FXMLCrapsController {
                             ComeMB.setOpacity(0);
                         }
                         BANK += FiveBet/5*7;
+                        payNone();
+                        workBets();
                         break;
                     
                 case 6: if(DC6Bet > 0){
@@ -1346,6 +1721,21 @@ public class FXMLCrapsController {
                             ComeMB.setOpacity(0);
                         }
                         BANK += SixBet/5*6;
+                        payNone();
+                        if(Hard6OFF == false){
+                            if(Die1 == 3 && Die2 == 3){
+                                BANK += Hard6Bet * 9;
+                            }
+                            else{
+                                TOTAL -= Hard6Bet;
+                                Hard6Bet = 0;
+                                Hard6BetLabel.setTextFill(Color.RED);
+                                Hard6BetLabel.setText("$" + Integer.toString(Hard6Bet));
+                                Hard6BetMB.setText("$" + Integer.toString(Hard6Bet));
+                                Hard6BetMB.setOpacity(0);
+                            }
+                        }
+                        workBets();
                         break;
                     
                 case 8: if(DC8Bet > 0){
@@ -1421,6 +1811,21 @@ public class FXMLCrapsController {
                             ComeMB.setOpacity(0);
                         }
                         BANK += EightBet/5*6;
+                        payNone();
+                        if(Hard8OFF == false){
+                            if(Die1 == 4 && Die2 == 4){
+                                BANK += Hard8Bet * 9;
+                            }
+                            else{
+                                TOTAL -= Hard8Bet;
+                                Hard8Bet = 0;
+                                Hard8BetLabel.setTextFill(Color.RED);
+                                Hard8BetLabel.setText("$" + Integer.toString(Hard8Bet));
+                                Hard8BetMB.setText("$" + Integer.toString(Hard8Bet));
+                                Hard8BetMB.setOpacity(0);
+                            }
+                        }
+                        workBets();
                         break;
                     
                 case 9: if(DC9Bet > 0){
@@ -1489,7 +1894,9 @@ public class FXMLCrapsController {
                             C9MB.setText(Integer.toString(C9Bet));
                             ComeMB.setOpacity(0);
                         }
-                        BANK += NineBet/5*7;                       
+                        BANK += NineBet/5*7;
+                        payNone();
+                        workBets();
                         break;
                     
                case 10: if(DC10Bet > 0){
@@ -1533,7 +1940,7 @@ public class FXMLCrapsController {
                             OddsBetLabel.setText("$" + Integer.toString(OddsBet));  
                             POINT = 0;
                             if(POINT == 0) PointLabel.setText("NONE");
-                            point = false;
+                            point = false;                            
                             PuckPic.setX(0);
                             PuckPic.setImage(OFF);
                         }                         
@@ -1558,7 +1965,30 @@ public class FXMLCrapsController {
                             C10MB.setText(Integer.toString(C10Bet));
                             ComeMB.setOpacity(0);
                         }
-                        BANK += TenBet/5*9;                       
+                        BANK += TenBet/5*9;
+                        payNone();
+                        if(Hard10OFF == false){
+                            if(Die1 == 5 && Die2 == 5){
+                                BANK += Hard10Bet * 7;
+                            }
+                            else{
+                                TOTAL -= Hard10Bet;
+                                Hard10Bet = 0;
+                                Hard10BetLabel.setTextFill(Color.RED);
+                                Hard10BetLabel.setText("$" + Integer.toString(Hard10Bet));
+                                Hard10BetMB.setText("$" + Integer.toString(Hard10Bet));
+                                Hard10BetMB.setOpacity(0);
+                            }
+                        }
+                         if(No10Bet > 0){
+                            TOTAL -= No10Bet;
+                            No10Bet = 0;
+                            No10BetLabel.setTextFill(Color.RED);
+                            No10BetLabel.setText("$" + Integer.toString(No10Bet));
+                            No10BetMB.setText("$" + Integer.toString(No10Bet));
+                            No10BetMB.setOpacity(0);
+                        }
+                        workBets();
                         break;
                     
                 case 11: if(DCBet>0) {
@@ -1570,6 +2000,9 @@ public class FXMLCrapsController {
                          }
                          BANK += FieldBet;
                          BANK += ComeBet;
+                         // Centre Action
+                         if(ElevenBet > 0) BANK += ElevenBet * 15;
+                         payNone();
                          break;
                     
                case 12: if(ComeBet>0) {
@@ -1580,6 +2013,10 @@ public class FXMLCrapsController {
                             ComeMB.setOpacity(0);
                         }
                         BANK += FieldBet*2;
+                        // Centre Action
+                        if(TwoBet > 0 ) BANK += TwoBet * 30;
+                        if(AnyCrapsBet > 0 ) BANK += AnyCrapsBet * 8;
+                        payNone();
                         break;   
                     
                 case 7: if(DCBet > 0){
@@ -1736,21 +2173,180 @@ public class FXMLCrapsController {
                                 
                         POINT = 0;
                         if(POINT == 0) PointLabel.setText("NONE");
-                        point = false;
+                        point = false;                        
                         PuckPic.setX(0);
                         PuckPic.setImage(OFF);
+                        // Centre Action
+                        if(Any7Bet > 0) BANK  += Any7Bet * 5;
+                        payNone();                        
+                        if(No4Bet > 0){
+                             TOTAL -= No4Bet;
+                             BANK += No4Bet * 1.5;
+                             No4Bet = 0;
+                             No4BetLabel.setText("$" + Integer.toString(No4Bet));
+                             No4BetMB.setText("$" + Integer.toString(No4Bet));
+                             No4BetMB.setOpacity(0);
+                         }
+                         if(No10Bet > 0){
+                             TOTAL -= No10Bet;
+                             BANK += No10Bet * 1.5;
+                             No10Bet = 0;
+                             No10BetLabel.setText("$" + Integer.toString(No10Bet));
+                             No10BetMB.setText("$" + Integer.toString(No10Bet));
+                             No10BetMB.setOpacity(0);
+                         }
+                         if(Hard4OFF == false && Hard4Bet > 0){
+                            TOTAL -= Hard4Bet;
+                            Hard4Bet = 0;
+                            Hard4BetLabel.setTextFill(Color.RED);
+                            Hard4BetLabel.setText("$" + Integer.toString(Hard4Bet));
+                            Hard4BetMB.setText("$" + Integer.toString(Hard4Bet));
+                            Hard4BetMB.setOpacity(0);                            
+                         }
+                         if(Hard6OFF == false && Hard6Bet > 0){
+                            TOTAL -= Hard6Bet;
+                            Hard6Bet = 0;
+                            Hard6BetLabel.setTextFill(Color.RED);
+                            Hard6BetLabel.setText("$" + Integer.toString(Hard6Bet));
+                            Hard6BetMB.setText("$" + Integer.toString(Hard6Bet));
+                            Hard6BetMB.setOpacity(0);                            
+                         }
+                         if(Hard8OFF == false && Hard8Bet > 0){
+                            TOTAL -= Hard8Bet;
+                            Hard8Bet = 0;
+                            Hard8BetLabel.setTextFill(Color.RED);
+                            Hard8BetLabel.setText("$" + Integer.toString(Hard8Bet));
+                            Hard8BetMB.setText("$" + Integer.toString(Hard8Bet));
+                            Hard8BetMB.setOpacity(0);                            
+                         }
+                         if(Hard10OFF == false && Hard10Bet > 0){
+                            TOTAL -= Hard10Bet;
+                            Hard10Bet = 0;
+                            Hard10BetLabel.setTextFill(Color.RED);
+                            Hard10BetLabel.setText("$" + Integer.toString(Hard10Bet));
+                            Hard10BetMB.setText("$" + Integer.toString(Hard10Bet));
+                            Hard10BetMB.setOpacity(0);                            
+                         }
+                         if(No4Bet > 0){
+                             TOTAL -= No4Bet;
+                             BANK += No4Bet * 1.5;
+                             No4Bet = 0;
+                             No4BetLabel.setText("$" + Integer.toString(No4Bet));
+                             No4BetMB.setText("$" + Integer.toString(No4Bet));
+                             No4BetMB.setOpacity(0);
+                         }
+                         if(No10Bet > 0){
+                             TOTAL -= No10Bet;
+                             BANK += No10Bet * 1.5;
+                             No10Bet = 0;
+                             No10BetLabel.setText("$" + Integer.toString(No10Bet));
+                             No10BetMB.setText("$" + Integer.toString(No10Bet));
+                             No10BetMB.setOpacity(0);
+                         }
+                         workBets();
                         break;   
             }
         // End If
             
         }
-        System.out.println("work Setlay");
+        //System.out.println("work Setlay");
         if(point == true) setLay(); 
         updateCash();
     }
     
+    private void workBets(){
+        if(point == true){
+            if(Hard4Bet > 0){
+                Hard4OFF = false;
+                Hard4BetMB.setOpacity(1);
+                Hard4BetMB.setText("$" + Integer.toString(Hard4Bet));
+            }
+            if(Hard6Bet > 0){
+                Hard6OFF = false;
+                Hard6BetMB.setOpacity(1);
+                Hard6BetMB.setText("$" + Integer.toString(Hard6Bet));
+            }
+            if(Hard8Bet > 0){
+                Hard8OFF = false;
+                Hard8BetMB.setOpacity(1);
+                Hard8BetMB.setText("$" + Integer.toString(Hard8Bet));
+            }
+            if(Hard10Bet > 0){
+                Hard10OFF = false;
+                Hard10BetMB.setOpacity(1);
+                Hard10BetMB.setText("$" + Integer.toString(Hard10Bet));
+            }
+        }
+        if(point == false){
+            if(Hard4Bet > 0){
+                Hard4OFF = true;
+                Hard4BetMB.setOpacity(0.5);
+                Hard4BetMB.setText("OFF");
+            }
+            if(Hard6Bet > 0){
+                Hard6OFF = true;
+                Hard6BetMB.setOpacity(0.5);
+                Hard6BetMB.setText("OFF");
+            }
+            if(Hard8Bet > 0){
+                Hard8OFF = true;
+                Hard8BetMB.setOpacity(0.5);
+                Hard8BetMB.setText("OFF");
+            }
+            if(Hard10Bet > 0){
+                Hard10OFF = true;
+                Hard10BetMB.setOpacity(0.5);
+                Hard10BetMB.setText("OFF");
+            }           
+        }
+    }
+    
+    private void payNone(){
+        TOTAL -= Any7Bet+AnyCrapsBet+TwoBet+ThreeBet+ElevenBet+TwelveBet;
+        if(Any7Bet > 0){
+            Any7Bet = 0;
+            Any7BetLabel.setTextFill(Color.RED);
+            Any7BetLabel.setText("$" + Integer.toString(Any7Bet));
+            Any7BetMB.setOpacity(0);
+        }
+        if(AnyCrapsBet > 0){
+            AnyCrapsBet = 0;
+            AnyCrapsBetLabel.setTextFill(Color.RED);
+            AnyCrapsBetLabel.setText("$" + Integer.toString(AnyCrapsBet));
+            AnyCrapsBetMB.setOpacity(0);           
+        }
+        if(TwoBet > 0){
+            TwoBet = 0;
+            TwoBetLabel.setTextFill(Color.RED);
+            TwoBetLabel.setText("$" + Integer.toString(TwoBet));
+            TwoBetMB.setOpacity(0);          
+        }
+        if(ThreeBet > 0){
+            ThreeBet = 0;
+            ThreeBetLabel.setTextFill(Color.RED);
+            ThreeBetLabel.setText("$" + Integer.toString(ThreeBet));
+            ThreeBetMB.setOpacity(0);           
+        }
+        if(ElevenBet > 0){
+            ElevenBet = 0;
+            ElevenBetLabel.setTextFill(Color.RED);
+            ElevenBetLabel.setText("$" + Integer.toString(ElevenBet));
+            ElevenBetMB.setOpacity(0);           
+        }
+        if(TwelveBet > 0){
+            TwelveBet = 0;
+            TwelveBetLabel.setTextFill(Color.RED);
+            TwelveBetLabel.setText("$" + Integer.toString(TwelveBet));
+            TwelveBetMB.setOpacity(0);           
+        }
+     }
+     
     @FXML void C4Add(ActionEvent event) { 
         if(C4Bet > 999) return;
+        if(BANK < 5){
+            broke();
+            return;
+        }
         TOTAL += 5;
         BANK -= 5;
         C4Bet += 5;
@@ -1759,8 +2355,11 @@ public class FXMLCrapsController {
     }
     
     @FXML void C4Odds(ActionEvent event) { 
-        if(BANK < 1) return;
         if(C4Bet == 0) return;
+        if(BANK < 5){
+            broke();
+            return;
+        }
         if(C4OddsBet >= C4Bet*2) return;
         C4OddsBet += 5;
         BANK -= 5;
@@ -1791,6 +2390,10 @@ public class FXMLCrapsController {
     
     @FXML void C5Add(ActionEvent event) { 
         if(C5Bet > 999) return;
+        if(BANK < 5){
+            broke();
+            return;
+        }
         TOTAL += 5;
         BANK -= 5;
         C5Bet += 5;
@@ -1799,13 +2402,20 @@ public class FXMLCrapsController {
     }
     
     @FXML void C5Odds(ActionEvent event) { 
-        if(BANK < 1) return;
         if(C5Bet == 0 || C5OddsBet >= C5Bet*2) return;
         if(C5OddsBet == 0) {
+            if(BANK < 6){
+                broke();
+                return;
+            }
             C5OddsBet += 6;
             BANK -= 6;
             TOTAL += 6;
         }else{
+            if(BANK < 2){
+                broke();
+                return;
+            }
             C5OddsBet += 2;
             BANK -= 2;
             TOTAL += 2;
@@ -1842,6 +2452,10 @@ public class FXMLCrapsController {
     
     @FXML void C6Add(ActionEvent event) { 
         if(C6Bet > 999) return;
+        if(BANK < 5){
+            broke();
+            return;
+        }
         TOTAL += 5;
         BANK -= 5;
         C6Bet += 5;
@@ -1850,9 +2464,12 @@ public class FXMLCrapsController {
     }
     
     @FXML void C6Odds(ActionEvent event) { 
-        if(BANK < 1) return;
         if(C6Bet == 0) return;
         if(C6OddsBet >= C6Bet*2) return;
+        if(BANK < 5){
+            broke();
+            return;
+        }
         C6OddsBet += 5;
         BANK -= 5;
         TOTAL += 5;        
@@ -1882,6 +2499,10 @@ public class FXMLCrapsController {
     
     @FXML void C8Add(ActionEvent event) { 
         if(C8Bet > 999) return;
+        if(BANK < 5){
+            broke();
+            return;
+        }
         TOTAL += 5;
         BANK -= 5;
         C8Bet += 5;
@@ -1890,9 +2511,12 @@ public class FXMLCrapsController {
     }
     
     @FXML void C8Odds(ActionEvent event) { 
-        if(BANK < 1) return;
         if(C8Bet == 0) return;
         if(C8OddsBet >= C8Bet*2) return;
+        if(BANK < 5){
+            broke();
+            return;
+        }
         C8OddsBet += 5;
         BANK -= 5;
         TOTAL += 5;        
@@ -1922,6 +2546,10 @@ public class FXMLCrapsController {
     
     @FXML void C9Add(ActionEvent event) { 
         if(C9Bet > 999) return;
+        if(BANK < 5){
+            broke();
+            return;
+        }
         TOTAL += 5;
         BANK -= 5;
         C9Bet += 5;
@@ -1930,13 +2558,20 @@ public class FXMLCrapsController {
     }
     
     @FXML void C9Odds(ActionEvent event) { 
-        if(BANK < 1) return;
         if(C9Bet == 0 || C9OddsBet >= C9Bet*2) return;
         if(C9OddsBet == 0) {
+            if(BANK < 6){
+                broke();
+                return;
+            }
             C9OddsBet += 6;
             BANK -= 6;
             TOTAL += 6;
         }else{
+            if(BANK < 2){
+                broke();
+                return;
+            }
             C9OddsBet += 2;
             BANK -= 2;
             TOTAL += 2;
@@ -1973,6 +2608,10 @@ public class FXMLCrapsController {
     
     @FXML void C10Add(ActionEvent event) { 
         if(C10Bet > 999) return;
+        if(BANK < 5){
+            broke();
+            return;
+        }
         TOTAL += 5;
         BANK -= 5;
         C10Bet += 5;
@@ -1981,8 +2620,11 @@ public class FXMLCrapsController {
     }
     
     @FXML void C10Odds(ActionEvent event) { 
-        if(BANK < 1) return;
         if(C10Bet == 0) return;
+        if(BANK < 5){
+            broke();
+            return;
+        }
         if(C10OddsBet >= C10Bet*2) return;
         C10OddsBet += 5;
         BANK -= 5;
@@ -2012,8 +2654,11 @@ public class FXMLCrapsController {
     }
     
     @FXML void DC4Lay(ActionEvent event) {
-        if(BANK < 1) return;
         if(DC4Bet == 0) return;
+        if(BANK < 10){
+            broke();
+            return;
+        }
         if(DC4LayBet >= DC4Bet*4) return;
         DC4LayBet += 10;
         BANK -= 10;
@@ -2049,13 +2694,20 @@ public class FXMLCrapsController {
     }
     
     @FXML void DC5Lay(ActionEvent event) { 
-        if(BANK < 1) return;
         if(DC5Bet == 0 || DC5LayBet >= DC5Bet*3) return;
         if(DC5LayBet == 0) {
+            if(BANK < 9){
+                broke();
+                return;
+            }
             DC5LayBet += 9;
             BANK -= 9;
             TOTAL += 9;
         }else{
+            if(BANK < 3){
+                broke();
+                return;
+            }
             DC5LayBet += 3;
             BANK -= 3;
             TOTAL += 3;
@@ -2091,9 +2743,12 @@ public class FXMLCrapsController {
     }
     
     @FXML void DC6Lay(ActionEvent event) { 
-        if(BANK < 1) return;
         if(DC6Bet == 0) return;
-        if(DC6LayBet >= DC6Bet*2.4) return;     
+        if(DC6LayBet >= DC6Bet*2.4) return; 
+        if(BANK < 6){
+            broke();
+            return;
+        }
         DC6LayBet += 6;
         BANK -= 6;
         TOTAL += 6;        
@@ -2128,9 +2783,12 @@ public class FXMLCrapsController {
     }
     
     @FXML void DC8Lay(ActionEvent event) { 
-        if(BANK < 1) return;
         if(DC8Bet == 0) return;
-        if(DC8LayBet >= DC8Bet*2.4) return;     
+        if(DC8LayBet >= DC8Bet*2.4) return;
+        if(BANK < 6){
+            broke();
+            return;
+        }
         DC8LayBet += 6;
         BANK -= 6;
         TOTAL += 6;        
@@ -2165,13 +2823,20 @@ public class FXMLCrapsController {
     }
     
     @FXML void DC9Lay(ActionEvent event) { 
-        if(BANK < 1) return;
         if(DC9Bet == 0 || DC9LayBet >= DC9Bet*3) return;
         if(DC9LayBet == 0) {
+            if(BANK < 9){
+                broke();
+                return;
+            }
             DC9LayBet += 9;
             BANK -= 9;
             TOTAL += 9;
         }else{
+            if(BANK < 3){
+                broke();
+                return;
+            }
             DC9LayBet += 3;
             BANK -= 3;
             TOTAL += 3;
@@ -2207,9 +2872,12 @@ public class FXMLCrapsController {
     }
     
     @FXML void DC10Lay(ActionEvent event) {
-        if(BANK < 1) return;
         if(DC10Bet == 0) return;
         if(DC10LayBet >= DC10Bet*4) return;
+        if(BANK < 10){
+            broke();
+            return;
+        }
         DC10LayBet += 10;
         BANK -= 10;
         TOTAL += 10;        
@@ -2242,6 +2910,518 @@ public class FXMLCrapsController {
         updateCash();
         DC10LayMB.setOpacity(0);
     }
-         
+    
+    /////////////////////////// New Stuff //////////////////////////////
+    @FXML void No4BetButtonAction(ActionEvent event) {   
+        if(No4Bet > 1999) return;
+        if(BANK < 21){
+            broke();
+            return;
+        }
+        TOTAL += 21;
+        BANK -= 21;
+        No4Bet += 20;       
+        No4BetLabel.setText("$" + Integer.toString(No4Bet));
+        No4BetLabel.setTextFill(Color.GREEN);
+        No4BetMB.setOpacity(1);
+        No4BetMB.setText(Integer.toString(No4Bet));
+        updateCash();
+    }
+    
+    @FXML void No4BetMBMinus(ActionEvent event) {   
+        if(No4Bet == 0) return;
+        TOTAL -= 21;
+        BANK += 21;
+        No4Bet -= 20;
+        updateCash();
+        No4BetLabel.setText("$" + Integer.toString(No4Bet));
+        No4BetMB.setText(Integer.toString(No4Bet));
+        if(No4Bet == 0) No4BetMB.setOpacity(0);
+    }
+    
+    @FXML void No4BetMBClear(ActionEvent event) {   
+        if(No4Bet == 0) return;
+        TOTAL -= No4Bet;
+        BANK += No4Bet;
+        No4Bet = 0;
+        updateCash();
+        No4BetLabel.setText("$" + Integer.toString(No4Bet));
+        No4BetMB.setText(Integer.toString(No4Bet));
+        No4BetMB.setOpacity(0);
+    }
+    
+    @FXML void No10BetButtonAction(ActionEvent event) {   
+        if(No10Bet > 1999) return;
+        if(BANK < 21){
+            broke();
+            return;
+        }
+        TOTAL += 21;
+        BANK -= 21;
+        No10Bet += 20;
+        No10BetLabel.setText("$" + Integer.toString(No10Bet));
+        No10BetLabel.setTextFill(Color.GREEN);
+        No10BetMB.setOpacity(1);
+        No10BetMB.setText(Integer.toString(No10Bet));
+        updateCash();
+    }
+    
+    @FXML void No10BetMBMinus(ActionEvent event) {   
+        if(No10Bet == 0) return;
+        TOTAL -= 21;
+        BANK += 21;
+        No10Bet -= 20;
+        updateCash();
+        No10BetLabel.setText("$" + Integer.toString(No10Bet));
+        No10BetMB.setText(Integer.toString(No10Bet));
+        if(No10Bet == 0) No10BetMB.setOpacity(0);
+    }
+    
+    @FXML void No10BetMBClear(ActionEvent event) {   
+        if(No10Bet == 0) return;
+        TOTAL -= No10Bet;
+        BANK += No10Bet;
+        No10Bet = 0;
+        updateCash();
+        No10BetLabel.setText("$" + Integer.toString(No10Bet));
+        No10BetMB.setText(Integer.toString(No10Bet));
+        No10BetMB.setOpacity(0);
+    }
+    
+    @FXML void AnyCrapsBetButtonAction(ActionEvent event) {   
+        if(AnyCrapsBet > 449) return;
+        if(BANK < 1){
+            broke();
+            return;
+        }
+        TOTAL += 1;
+        BANK -= 1;
+        AnyCrapsBet += 1;
+        updateCash();
+        AnyCrapsBetLabel.setText("$" + Integer.toString(AnyCrapsBet));
+        AnyCrapsBetLabel.setTextFill(Color.GREEN);
+        AnyCrapsBetMB.setOpacity(1);
+        AnyCrapsBetMB.setText("$" + Integer.toString(AnyCrapsBet));
+    }
+    
+    @FXML void AnyCrapsBetMBMinus(ActionEvent event) {   
+        if(AnyCrapsBet == 0) return;
+        TOTAL -= 1;
+        BANK += 1;
+        AnyCrapsBet -= 1;
+        updateCash();
+        AnyCrapsBetLabel.setText("$" + Integer.toString(AnyCrapsBet));
+        AnyCrapsBetMB.setText("$" + Integer.toString(AnyCrapsBet));
+        if(AnyCrapsBet == 0) AnyCrapsBetMB.setOpacity(0);
+    }
+    
+    @FXML void AnyCrapsBetMBClear(ActionEvent event) {   
+        if(AnyCrapsBet == 0) return;
+        TOTAL -= AnyCrapsBet;
+        BANK += AnyCrapsBet;
+        AnyCrapsBet = 0;
+        updateCash();
+        AnyCrapsBetLabel.setText("$" + Integer.toString(AnyCrapsBet));
+        AnyCrapsBetMB.setText("$" + Integer.toString(AnyCrapsBet));
+        AnyCrapsBetMB.setOpacity(0);
+    }
+    
+     @FXML void Any7BetButtonAction(ActionEvent event) {   
+        if(Any7Bet > 749) return;
+        if(BANK < 1){
+            broke();
+            return;
+        }
+        TOTAL += 1;
+        BANK -= 1;
+        Any7Bet += 1;
+        updateCash();
+        Any7BetLabel.setText("$" + Integer.toString(Any7Bet));
+        Any7BetLabel.setTextFill(Color.GREEN);
+        Any7BetMB.setOpacity(1);
+        Any7BetMB.setText("$" + Integer.toString(Any7Bet));
+    }
+    
+    @FXML void Any7BetMBMinus(ActionEvent event) {   
+        if(Any7Bet == 0) return;
+        TOTAL -= 1;
+        BANK += 1;
+        Any7Bet -= 1;
+        updateCash();
+        Any7BetLabel.setText("$" + Integer.toString(Any7Bet));
+        Any7BetMB.setText("$" + Integer.toString(Any7Bet));
+        if(Any7Bet == 0) Any7BetMB.setOpacity(0);
+    }
+    
+    @FXML void Any7BetMBClear(ActionEvent event) {   
+        if(Any7Bet == 0) return;
+        TOTAL -= Any7Bet;
+        BANK += Any7Bet;
+        Any7Bet = 0;
+        updateCash();
+        Any7BetLabel.setText("$" + Integer.toString(Any7Bet));
+        Any7BetMB.setText("$" + Integer.toString(Any7Bet));
+        Any7BetMB.setOpacity(0);
+    }
+    
+    @FXML void TwoBetButtonAction(ActionEvent event) {   
+        if(TwoBet > 99) return;
+        if(BANK < 1){
+            broke();
+            return;
+        }
+        TOTAL += 1;
+        BANK -= 1;
+        TwoBet += 1;
+        updateCash();
+        TwoBetLabel.setText("$" + Integer.toString(TwoBet));
+        TwoBetLabel.setTextFill(Color.GREEN);
+        TwoBetMB.setOpacity(1);
+        TwoBetMB.setText("$" + Integer.toString(TwoBet));
+    }
+    
+    @FXML void TwoBetMBMinus(ActionEvent event) {   
+        if(TwoBet == 0) return;
+        TOTAL -= 1;
+        BANK += 1;
+        TwoBet -= 1;
+        updateCash();
+        TwoBetLabel.setText("$" + Integer.toString(TwoBet));
+        TwoBetMB.setText("$" + Integer.toString(TwoBet));
+        if(TwoBet == 0) TwoBetMB.setOpacity(0);
+    }
+    
+    @FXML void TwoBetMBClear(ActionEvent event) {   
+        if(TwoBet == 0) return;
+        TOTAL -= TwoBet;
+        BANK += TwoBet;
+        TwoBet = 0;
+        updateCash();
+        TwoBetLabel.setText("$" + Integer.toString(TwoBet));
+        TwoBetMB.setText("$" + Integer.toString(TwoBet));
+        TwoBetMB.setOpacity(0);
+    }
+    
+    @FXML void ThreeBetButtonAction(ActionEvent event) {   
+        if(ThreeBet > 199) return;
+        if(BANK < 1){
+            broke();
+            return;
+        }
+        TOTAL += 1;
+        BANK -= 1;
+        ThreeBet += 1;
+        updateCash();
+        ThreeBetLabel.setText("$" + Integer.toString(ThreeBet));
+        ThreeBetLabel.setTextFill(Color.GREEN);
+        ThreeBetMB.setOpacity(1);
+        ThreeBetMB.setText("$" + Integer.toString(ThreeBet));
+    }
+    
+    @FXML void ThreeBetMBMinus(ActionEvent event) {   
+        if(ThreeBet == 0) return;
+        TOTAL -= 1;
+        BANK += 1;
+        ThreeBet -= 1;
+        updateCash();
+        ThreeBetLabel.setText("$" + Integer.toString(ThreeBet));
+        ThreeBetMB.setText("$" + Integer.toString(ThreeBet));
+        if(ThreeBet == 0) ThreeBetMB.setOpacity(0);
+    }
+    
+    @FXML void ThreeBetMBClear(ActionEvent event) {   
+        if(ThreeBet == 0) return;
+        TOTAL -= ThreeBet;
+        BANK += ThreeBet;
+        ThreeBet = 0;
+        updateCash();
+        ThreeBetLabel.setText("$" + Integer.toString(ThreeBet));
+        ThreeBetMB.setText("$" + Integer.toString(ThreeBet));
+        ThreeBetMB.setOpacity(0);
+    }
+    
+    @FXML void ElevenBetButtonAction(ActionEvent event) {   
+        if(ElevenBet > 199) return;
+        if(BANK < 1){
+            broke();
+            return;
+        }
+        TOTAL += 1;
+        BANK -= 1;
+        ElevenBet += 1;
+        updateCash();
+        ElevenBetLabel.setText("$" + Integer.toString(ElevenBet));
+        ElevenBetLabel.setTextFill(Color.GREEN);
+        ElevenBetMB.setOpacity(1);
+        ElevenBetMB.setText("$" + Integer.toString(ElevenBet));
+    }
+    
+    @FXML void ElevenBetMBMinus(ActionEvent event) {   
+        if(ElevenBet == 0) return;
+        TOTAL -= 1;
+        BANK += 1;
+        ElevenBet -= 1;
+        updateCash();
+        ElevenBetLabel.setText("$" + Integer.toString(ElevenBet));
+        ElevenBetMB.setText("$" + Integer.toString(ElevenBet));
+        if(ElevenBet == 0) ElevenBetMB.setOpacity(0);
+    }
+    
+    @FXML void ElevenBetMBClear(ActionEvent event) {   
+        if(ElevenBet == 0) return;
+        TOTAL -= ElevenBet;
+        BANK += ElevenBet;
+        ElevenBet = 0;
+        updateCash();
+        ElevenBetLabel.setText("$" + Integer.toString(ElevenBet));
+        ElevenBetMB.setText("$" + Integer.toString(ElevenBet));
+        ElevenBetMB.setOpacity(0);
+    }
+    
+    @FXML void TwelveBetButtonAction(ActionEvent event) {   
+        if(TwelveBet > 99) return;
+        if(BANK < 1){
+            broke();
+            return;
+        }
+        TOTAL += 1;
+        BANK -= 1;
+        TwelveBet += 1;
+        updateCash();
+        TwelveBetLabel.setText("$" + Integer.toString(TwelveBet));
+        TwelveBetLabel.setTextFill(Color.GREEN);
+        TwelveBetMB.setOpacity(1);
+        TwelveBetMB.setText("$" + Integer.toString(TwelveBet));
+    }
+    
+    @FXML void TwelveBetMBMinus(ActionEvent event) {   
+        if(TwelveBet == 0) return;
+        TOTAL -= 1;
+        BANK += 1;
+        TwelveBet -= 1;
+        updateCash();
+        TwelveBetLabel.setText("$" + Integer.toString(TwelveBet));
+        TwelveBetMB.setText("$" + Integer.toString(TwelveBet));
+        if(TwelveBet == 0) TwelveBetMB.setOpacity(0);
+    }
+    
+    @FXML void TwelveBetMBClear(ActionEvent event) {   
+        if(TwelveBet == 0) return;
+        TOTAL -= TwelveBet;
+        BANK += TwelveBet;
+        TwelveBet = 0;
+        updateCash();
+        TwelveBetLabel.setText("$" + Integer.toString(TwelveBet));
+        TwelveBetMB.setText("$" + Integer.toString(TwelveBet));
+        TwelveBetMB.setOpacity(0);
+    }
+    
+    @FXML void Hard6BetButtonAction(ActionEvent event) {   
+        if(Hard6Bet > 299) return;
+        if(BANK < 1){
+            broke();
+            return;
+        }
+        Hard6OFF = false;
+        TOTAL += 1;
+        BANK -= 1;
+        Hard6Bet += 1;
+        updateCash();
+        Hard6BetLabel.setText("$" + Integer.toString(Hard6Bet));
+        Hard6BetLabel.setTextFill(Color.GREEN);
+        Hard6BetMB.setOpacity(1);
+        Hard6BetMB.setText("$" + Integer.toString(Hard6Bet));
+    }
+    
+    @FXML void Hard6BetMBONOFF(ActionEvent event) {   
+        if(Hard6Bet < 1) return;
+        if(Hard6OFF == false){
+            Hard6OFF = true;
+            Hard6BetMB.setOpacity(0.5);
+            Hard6BetMB.setText("OFF");
+        }else{
+            Hard6OFF = false;
+            Hard6BetMB.setOpacity(1);
+            Hard6BetMB.setText("$" + Integer.toString(Hard6Bet));
+        }
+    }
+    
+    @FXML void Hard6BetMBMinus(ActionEvent event) {   
+        if(Hard6Bet == 0) return;
+        TOTAL -= 1;
+        BANK += 1;
+        Hard6Bet -= 1;
+        updateCash();
+        Hard6BetLabel.setText("$" + Integer.toString(Hard6Bet));
+        Hard6BetMB.setText("$" + Integer.toString(Hard6Bet));
+        if(Hard6Bet == 0) Hard6BetMB.setOpacity(0);
+    }
+    
+    @FXML void Hard6BetMBClear(ActionEvent event) {   
+        if(Hard6Bet == 0) return;
+        TOTAL -= Hard6Bet;
+        BANK += Hard6Bet;
+        Hard6Bet = 0;
+        updateCash();
+        Hard6BetLabel.setText("$" + Integer.toString(Hard6Bet));
+        Hard6BetMB.setText("$" + Integer.toString(Hard6Bet));
+        Hard6BetMB.setOpacity(0);
+    }
+    
+    @FXML void Hard8BetButtonAction(ActionEvent event) {   
+        if(Hard8Bet > 299) return;
+        if(BANK < 1){
+            broke();
+            return;
+        }
+        Hard8OFF = false;
+        TOTAL += 1;
+        BANK -= 1;
+        Hard8Bet += 1;
+        updateCash();
+        Hard8BetLabel.setText("$" + Integer.toString(Hard8Bet));
+        Hard8BetLabel.setTextFill(Color.GREEN);
+        Hard8BetMB.setOpacity(1);
+        Hard8BetMB.setText("$" + Integer.toString(Hard8Bet));
+    }
+    
+    @FXML void Hard8BetMBONOFF(ActionEvent event) {   
+        if(Hard8Bet < 1) return;
+        if(Hard8OFF == false){
+            Hard8OFF = true;
+            Hard8BetMB.setOpacity(0.5);
+            Hard8BetMB.setText("OFF");
+        }else{
+            Hard8OFF = false;
+            Hard8BetMB.setOpacity(1);
+            Hard8BetMB.setText("$" + Integer.toString(Hard8Bet));
+        }
+    }
+    
+    @FXML void Hard8BetMBMinus(ActionEvent event) {   
+        if(Hard8Bet == 0) return;
+        TOTAL -= 1;
+        BANK += 1;
+        Hard8Bet -= 1;
+        updateCash();
+        Hard8BetLabel.setText("$" + Integer.toString(Hard8Bet));
+        Hard8BetMB.setText("$" + Integer.toString(Hard8Bet));
+        if(Hard8Bet == 0) Hard8BetMB.setOpacity(0);
+    }
+    
+    @FXML void Hard8BetMBClear(ActionEvent event) {   
+        if(Hard8Bet == 0) return;
+        TOTAL -= Hard8Bet;
+        BANK += Hard8Bet;
+        Hard8Bet = 0;
+        updateCash();
+        Hard8BetLabel.setText("$" + Integer.toString(Hard8Bet));
+        Hard8BetMB.setText("$" + Integer.toString(Hard8Bet));
+        Hard8BetMB.setOpacity(0);
+    }
+    
+    @FXML void Hard4BetButtonAction(ActionEvent event) {   
+        if(Hard4Bet > 449) return;
+        if(BANK < 1){
+            broke();
+            return;
+        }
+        Hard4OFF = false;
+        TOTAL += 1;
+        BANK -= 1;
+        Hard4Bet += 1;
+        updateCash();
+        Hard4BetLabel.setText("$" + Integer.toString(Hard4Bet));
+        Hard4BetLabel.setTextFill(Color.GREEN);
+        Hard4BetMB.setOpacity(1);
+        Hard4BetMB.setText("$" + Integer.toString(Hard4Bet));
+    }
+    
+    @FXML void Hard4BetMBONOFF(ActionEvent event) {   
+        if(Hard4Bet < 1) return;
+        if(Hard4OFF == false){
+            Hard4OFF = true;
+            Hard4BetMB.setOpacity(0.5);
+            Hard4BetMB.setText("OFF");
+        }else{
+            Hard4OFF = false;
+            Hard4BetMB.setOpacity(1);
+            Hard4BetMB.setText("$" + Integer.toString(Hard4Bet));
+        }
+    }
+    
+    @FXML void Hard4BetMBMinus(ActionEvent event) {   
+        if(Hard4Bet == 0) return;
+        TOTAL -= 1;
+        BANK += 1;
+        Hard4Bet -= 1;
+        updateCash();
+        Hard4BetLabel.setText("$" + Integer.toString(Hard4Bet));
+        Hard4BetMB.setText("$" + Integer.toString(Hard4Bet));
+        if(Hard4Bet == 0) Hard4BetMB.setOpacity(0);
+    }
+    
+    @FXML void Hard4BetMBClear(ActionEvent event) {   
+        if(Hard4Bet == 0) return;
+        TOTAL -= Hard4Bet;
+        BANK += Hard4Bet;
+        Hard4Bet = 0;
+        updateCash();
+        Hard4BetLabel.setText("$" + Integer.toString(Hard4Bet));
+        Hard4BetMB.setText("$" + Integer.toString(Hard4Bet));
+        Hard4BetMB.setOpacity(0);
+    }
+    
+    @FXML void Hard10BetButtonAction(ActionEvent event) {   
+        if(Hard4Bet > 449) return;
+        if(BANK < 1){
+            broke();
+            return;
+        }
+        Hard10OFF = false;
+        TOTAL += 1;
+        BANK -= 1;
+        Hard10Bet += 1;
+        updateCash();
+        Hard10BetLabel.setText("$" + Integer.toString(Hard10Bet));
+        Hard10BetLabel.setTextFill(Color.GREEN);
+        Hard10BetMB.setOpacity(1);
+        Hard10BetMB.setText("$" + Integer.toString(Hard10Bet));
+    }
+    
+    @FXML void Hard10BetMBONOFF(ActionEvent event) {   
+        if(Hard10Bet < 1) return;
+        if(Hard10OFF == false){
+            Hard10OFF = true;
+            Hard10BetMB.setOpacity(0.5);
+            Hard10BetMB.setText("OFF");
+        }else{
+            Hard10OFF = false;
+            Hard10BetMB.setOpacity(1);
+            Hard10BetMB.setText("$" + Integer.toString(Hard10Bet));
+        }
+    }
+    
+    @FXML void Hard10BetMBMinus(ActionEvent event) {   
+        if(Hard10Bet == 0) return;
+        TOTAL -= 1;
+        BANK += 1;
+        Hard10Bet -= 1;
+        updateCash();
+        Hard10BetLabel.setText("$" + Integer.toString(Hard10Bet));
+        Hard10BetMB.setText("$" + Integer.toString(Hard10Bet));
+        if(Hard10Bet == 0) Hard10BetMB.setOpacity(0);
+    }
+    
+    @FXML void Hard10BetMBClear(ActionEvent event) {   
+        if(Hard10Bet == 0) return;
+        TOTAL -= Hard10Bet;
+        BANK += Hard10Bet;
+        Hard10Bet = 0;
+        updateCash();
+        Hard10BetLabel.setText("$" + Integer.toString(Hard10Bet));
+        Hard10BetMB.setText("$" + Integer.toString(Hard10Bet));
+        Hard10BetMB.setOpacity(0);
+    }
 // END    
 }

@@ -14,11 +14,13 @@ public class Account implements java.io.Serializable{
     private String Name;
     private String Password;
     private int Bankroll;
+    private int Balance;
     
-    public Account(String n, String p, int i){
+    public Account(String n, String p, int i, int b){
         Name = n;
         Password = p;
         Bankroll = i;
+        Balance = b;
     }
   
     public String getName(){
@@ -35,5 +37,21 @@ public class Account implements java.io.Serializable{
     
     public void setBankroll(int b){
       Bankroll = b;
+    }
+    
+    public int getBalance(){
+      return Balance;
+    }
+    
+    public void setBalance(int i){
+      Balance = i;
+    }
+    
+    public void borrow(){
+      Balance -= 100;
+    }
+    
+    public void repay(){
+      Balance += 100;
     }
 }
