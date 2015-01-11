@@ -11,7 +11,6 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Control;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import static jfxcraps.FXMLCrapsController.Accountname;
@@ -19,7 +18,6 @@ import static jfxcraps.FXMLCrapsController.Accountname;
 public class JFXCraps extends Application {
     
     public static String VERSION = "Version 1.2";
-    Control controller;
     
     @Override
     public void start(Stage stage) throws Exception {
