@@ -250,13 +250,14 @@ public class FXMLCrapsController {
     }
     
     @FXML void BorrowButtonAction(ActionEvent event) {
-        if(BANK > 99) return;
+        if(BANK > 99 && Balance < -99) return;
         Balance -= 100;
         BANK += 100;
         BalanceLabel.setTextFill(Color.RED);
         BankLabel.setTextFill(Color.GREEN);
         updateCash();
-        StatusLabel.setText("Borrowed $100.");
+        if(Balance > 0) StatusLabel.setText("Withdrew $100.");
+        else StatusLabel.setText("Borrowed $100.");
     }
     
     @FXML void RepayButtonAction(ActionEvent event) {
@@ -505,7 +506,7 @@ public class FXMLCrapsController {
             broke();
             return;
         }
-        if(ComeBet > 999) return;
+        if(ComeBet > 999 || point == false) return;
         ComeBet += 5;
         BANK -= 5;
         TOTAL += 5;        
