@@ -8,12 +8,13 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import Classes.BaseAccount;
 
 public class Login {
     
-    ArrayList<Account> accounts;
+    ArrayList<BaseAccount> accounts;
     File dirCheck, banx;
-    Account player;
+    BaseAccount player;
     
     public Login(){
         accounts = new ArrayList<>();
@@ -48,7 +49,7 @@ public class Login {
             return;
         }
         for(int i = 0;i<accounts.size();i++){
-            player = (Account)accounts.get(i);
+            player = (BaseAccount)accounts.get(i);
             System.out.println("Deserialized Arraylist: " + i);
             System.out.println("Name: " + player.getName());
             System.out.println("Password: " + player.getPassword());
@@ -72,12 +73,12 @@ public class Login {
     
     public boolean newAccount(String n, String p){
         for(int i = 0;i<accounts.size();i++){
-            player = (Account)accounts.get(i);
+            player = (BaseAccount)accounts.get(i);
             if(n.equals(player.getName())){
                 return false;
             }
         }
-        accounts.add(new Account(n,p,100,0));
+        accounts.add(new BaseAccount(n,p,100,0));
         System.out.println("accounts size: " + accounts.size());
         writeAccount();
         return true;
@@ -85,7 +86,7 @@ public class Login {
 
     public void login(String n, String p){
         for(int i = 0;i<accounts.size();i++){
-            player = (Account) accounts.get(i);
+            player = (BaseAccount) accounts.get(i);
             if(n.equals(player.getName())){
                 if(p.equals(player.getPassword())){
                     System.out.println("Welcome " + player.getName() + "!");
@@ -102,7 +103,7 @@ public class Login {
     
     public void updateBank(){
         for(int i = 0;i<accounts.size();i++){
-            player = (Account) accounts.get(i);
+            player = (BaseAccount) accounts.get(i);
             if(FXMLCrapsController.Accountname.equals(player.getName())){
                 player.setBankroll(FXMLCrapsController.BANK);
                 player.setBalance(FXMLCrapsController.Balance);

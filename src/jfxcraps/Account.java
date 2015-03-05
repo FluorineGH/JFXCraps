@@ -9,7 +9,8 @@ package jfxcraps;
 /**
  *
  * @author jcalvert
- */
+
+
 public class Account implements java.io.Serializable{
     private String Name;
     private String Password;
@@ -55,3 +56,4 @@ public class Account implements java.io.Serializable{
       Balance += 100;
     }
 }
+*/

@@ -13,6 +13,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+import Classes.BaseAccount;
 
 public class FXMLCrapsController {
 
@@ -180,7 +181,7 @@ public class FXMLCrapsController {
     static int Bankroll;
     static int Balance;
     static boolean acc = false;
-    Account player;
+    BaseAccount player;
         
     public FXMLCrapsController(){     
         BANK = 100;
